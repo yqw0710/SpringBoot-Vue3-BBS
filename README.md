@@ -67,3 +67,24 @@ springboot从2.3.2RELEASE升到2.4.2，其他依赖的版本也更换到了最�
 
 ## 前端变化
 
+变化很大
+
+### 1. Vue全家桶都用最新的，新特性也能用就用
+
+组合式Api真香，但是Vuex和Vue-Router最新官方文档还没有中文。。
+
+### 2. UI组件库从又换成了Element的ElementPlus
+
+从element-ui到ant-design-vue到ElementPlus
+
+### 3. 添加主题切换功能
+
+就用SCSS生成多套主题 样式
+
+### 4. 页面美化
+
+审美果然会一直提高的
+
+### 5. 参考别的项目规范了代码风格
+
+特别是Vue-element-admin
