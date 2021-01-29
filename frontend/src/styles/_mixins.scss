@@ -1,0 +1,75 @@
+/**
+* 参考:https://www.cnblogs.com/HONGYE1994/p/8012093.html
+* 悬停出现中间到两边展开的border-bottom 元素要有position: relative;
+* 下划线的跟内容的padding,下划线的颜色,动画时间
+*/
+@mixin xuanting($paddingBottom:5px, $bottomColor:#1890ff, $duration:300ms) {
+  text-decoration: none;
+  position: relative;
+  list-style: none;
+  padding-bottom: $paddingBottom;
+
+  &:before,
+  &:after,
+  &>.ui-border-element:before,
+  &>.ui-border-element:after {
+    content: '';
+    position: absolute
+  }
+
+  &:after {
+    border-bottom: 2px solid $bottomColor;
+    left: 51%;
+    right: 51%;
+    bottom: 0px;
+    -webkit-transition-property: all;
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    transition-property: all;
+    -webkit-transition-timing-function: cubic-bezier(0, 0.98, 0.51, 0.93);
+    -moz-transition-timing-function: cubic-bezier(0, 0.98, 0.51, 0.93);
+    -o-transition-timing-function: cubic-bezier(0, 0.98, 0.51, 0.93);
+    transition-timing-function: cubic-bezier(0, 0.98, 0.51, 0.93);
+    -webkit-transition-duration: $duration;
+    -moz-transition-duration: $duration;
+    -o-transition-duration: $duration;
+    transition-duration: $duration;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s
+  }
+
+  &:hover:after {
+    left: 0%;
+    right: 0%
+  }
+
+  &:not(:hover):after {
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s
+  }
+}
+
+/**
+* 溢出省略号
+* @param {Number} 行数
+*/
+@mixin ellipsis($rowCount: 1) {
+  @if $rowCount <=1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @else {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $rowCount;
+    -webkit-box-orient: vertical;
+  }
+}

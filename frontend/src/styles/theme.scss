@@ -1,0 +1,52 @@
+@import "dark";
+@import "light";
+
+/*
+主题有这几方面的颜色
+[主题色]
+文字[首要/常规/次要]颜色
+[边框/边界]颜色
+[背景]颜色
+要穿透ui组件的样式：:deep(选择器){...}
+// 换肤实现，参考自：https://juejin.cn/post/6844904042481582088
+*/
+
+
+//  2.将定义好到主题添加到map中
+$themes: (light:$theme-light,
+  dark:$theme-dark,
+);
+
+// 3. 定义一个mixin
+@mixin mytheme() {
+
+  // 遍历$themes里面的主题
+  @each $theme-name,
+  $map in $themes {
+    $theme-map: () !global;
+
+    // 循环合并键值对
+    @each $key,
+    $value in $map {
+      $theme-map: map-merge($theme-map, ($key:$value)) !global;
+    }
+
+    // 生成N套类样式
+    .theme-#{$theme-name} & {
+      // 通过键去获取对应的值作为样式的属性
+      color: themed("font-color");
+      font-size: themed("font-size");
+      background-color: themed("background-color");
+
+      .is-active {
+        color: themed("font-color") !important;;
+      }
+    }
+
+  }
+}
+
+// 通过key获取map中到值
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

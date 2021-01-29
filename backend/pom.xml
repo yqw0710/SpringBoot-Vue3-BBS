@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.yuan</groupId>
+    <artifactId>bbs</artifactId>
+    <description>A english study community</description>
+    <!--    作为项目的父依赖，打包方式得设置为pom，默认是jar-->
+    <packaging>pom</packaging>
+    <version>0.1</version>
+    <name>bbs</name>
+
+    <!-- 管理主要的子模块-->
+    <modules>
+        <module>bbs-common</module>
+        <module>bbs-service</module>
+        <module>bbs-security</module>
+        <module>bbs-web</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <bbs-common.version>0.1</bbs-common.version>
+        <bbs-service.version>0.1</bbs-service.version>
+        <bbs-security.version>0.1</bbs-security.version>
+        <hutool.version>5.5.7</hutool.version>
+        <knife4j.verison>2.0.8</knife4j.verison>
+        <mybitsPlus.version>3.4.2</mybitsPlus.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!-- swagger-ui的vue版本-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j.verison}</version>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.yuan</groupId>
+                <artifactId>bbs-common</artifactId>
+                <version>${bbs-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yuan</groupId>
+                <artifactId>bbs-service</artifactId>
+                <version>${bbs-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yuan</groupId>
+                <artifactId>bbs-security</artifactId>
+                <version>${bbs-security.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <repositories>
+        <!-- 阿里云仓库,配置Maven仓库-->
+        <repository>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

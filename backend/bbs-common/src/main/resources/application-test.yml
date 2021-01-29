@@ -1,0 +1,51 @@
+spring:
+  # 数据源配置(mysql)
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/yuan?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: test1
+    password: 123456
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 8MB # 设置文件最大大小 超过会返回401
+  # redis配置
+  redis:
+    host: 127.0.0.1
+    password: 123456
+
+  # 热部署在IDEA中的使用： Ctrl + Shift + F9手动重新编译或者让IDEA自动去编译，设置如下:
+  # 1. 编译器->√自动构建项目
+  # 2. ctrl + shift + alt + /,选择Registry,勾上 Compiler autoMake allow when app running
+  devtools:
+    restart:
+      # 添加路径到监控队列
+      additional-paths: mapper/**
+      # 自动重启开关
+      enabled: false
+    # 关闭自动刷新页面
+    livereload:
+      enabled: false
+jwt:
+  # 加密秘钥
+  secret: f4e2e52034348f86b67cde581c0f9eb5
+  # token有效时长，7天，单位秒
+  expire: 604800
+  # 头部键名
+  header: token
+
+# 百度相关api调用
+baidu:
+  appid: 20200515000456177
+  securityKey: 4RTe7mWs8ddlve4o3RuK
+
+# 七牛云相关配置
+qiniu:
+  path: http://res7.fanyibar.top/
+  bucket: somegenki
+  accessKey: aot_ImvQM1X1iGysFH6xCjNwTNkMsVLgr0aUy0r-
+  secretKey: IOvOgoLGC7TydBdYNKOHJa6SDKmRt8V7U2W2Sv7m
+
+# 文件上传功能的保存路径
+file-save-path: /upload/

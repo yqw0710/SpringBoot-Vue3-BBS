@@ -1,0 +1,75 @@
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <title>11-发信息</title>
+</head>
+
+<body>
+<input type="text" name="name" id="name"/>
+<button onclick="connection()">建立链接</button>
+<button onclick="disconnect()">断开链接</button>
+<br/>
+接收者名字:<input type="text" name="toUser" id="toUser"/><br/>
+发送的内容:<input type="text" name="toMessage" id="toMessage"/>
+<button type="button" onclick="sendMessage()">发送</button>
+<span id="message"></span>
+<hr/>
+<div id="consoleLog" style="height: 500px;border: 1px solid red;"></div>
+</body>
+<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript">
+  const url = 'http://localhost:8080/api/ws';
+  var stomp = null;
+  var payload = {
+    'type': 'CHAT',
+    'receiver': document.querySelector("#toUser").value,
+    'sender': 'jojo1',
+    'content': '这是消息的内容'
+  };
+  const header = {
+    token: "jojo1",
+    info: "这个header展示没用，token放连接的url里了",
+  }
+
+  function connection() {
+    //1. 这里携带token，有效的才允许连接
+    stomp = Stomp.client('ws://localhost:8080/api/ws?token=jojo1')
+    //2. 这里的header对象是建立连接后后端才能拿到的
+    stomp.connect(header, function () {
+      console.log("连接成功!")
+      //3. 连接成功后立即发个消息
+      stomp.send("/app/greeting", {}, JSON.stringify(payload));
+      stomp.subscribe('/app/subscribe', function (frame) {
+        //let content = frame.body;
+        console.log("订阅的服务端消息：" + frame);
+      });
+      //订阅群聊的消息
+      stomp.subscribe('/topic/public', function (frame) {
+        document.querySelector('#consoleLog').innerHTML = frame.body;
+        console.log(frame);
+      });
+    }, function () {
+      console.error("连接失败!")
+    });
+  }
+
+  function sendMessage() {
+    payload.receiver = document.getElementById("toUser").value;
+    payload.content = document.getElementById("toMessage").value;
+    console.log(payload);
+    stomp.send("/app/chatTo", {}, JSON.stringify(payload));
+  }
+
+  function disconnect() {
+    Stomp.disconnect(() => {
+      console.log("断开连接");
+    })
+  }
+
+  window.onunload = function () {
+    disconnect()
+  }
+</script>
+
+</html>

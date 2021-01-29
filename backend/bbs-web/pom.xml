@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yuan</groupId>
+        <artifactId>bbs</artifactId>
+        <version>0.1</version>
+    </parent>
+    <artifactId>bbs-web</artifactId>
+    <version>0.1</version>
+    <name>bbs-web</name>
+    <description>处理前端请求的controller的web层</description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yuan</groupId>
+            <artifactId>bbs-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yuan</groupId>
+            <artifactId>bbs-service</artifactId>
+        </dependency>
+        <!-- websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <!--        打包的相关设置只需要写在web模块-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>org.freemarker</groupId>
+                            <artifactId>freemarker</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>com.baomidou</groupId>
+                            <artifactId>mybatis-plus-generator</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>cn.smallbun.screw</groupId>
+                            <artifactId>screw-core</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

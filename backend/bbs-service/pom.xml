@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yuan</groupId>
+        <artifactId>bbs</artifactId>
+        <version>0.1</version>
+    </parent>
+    <artifactId>bbs-service</artifactId>
+    <version>0.1</version>
+    <name>bbs-service</name>
+    <description>业务层和数据库层</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yuan</groupId>
+            <artifactId>bbs-common</artifactId>
+        </dependency>
+        <!-- redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybitsPlus.version}</version>
+        </dependency>
+        <!-- mybatis-plus-generator:代码生成器/逆向工程 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <!-- 数据库表结构文档生成工具 -->
+        <dependency>
+            <groupId>cn.smallbun.screw</groupId>
+            <artifactId>screw-core</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+        <!-- freemarker:代码生成器需要的模板引擎-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.30</version>
+        </dependency>
+    </dependencies>
+
+</project>
