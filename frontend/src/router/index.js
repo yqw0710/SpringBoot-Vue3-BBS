@@ -29,11 +29,6 @@ const routes = [
     component: () => import('../views/Publicity.vue')
   },
   {
-    path: '/css-test',
-    name: "CssTest",
-    component: () => import('../views/CssTest.vue')
-  },
-  {
     path: '/:catchAll(.*)',
     name: 'catch',
     component: Layout,

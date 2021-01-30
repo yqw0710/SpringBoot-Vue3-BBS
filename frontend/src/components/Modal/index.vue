@@ -45,7 +45,6 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 250px;
-  min-height: 250px;
   max-width: 100%;
   border: 1px solid black;
   border-radius: 5px;
@@ -55,14 +54,15 @@ export default {
 
 .modal-close-btn {
   position: absolute;
-  top: -50px;
+  top: -30px;
   right: 0;
   border: none;
   outline: none;
   background-color: transparent;
   cursor: pointer;
   font-size: 1.5rem;
-  color: #FFF;
+  font-weight: bold;
+  color: #5c5959;
 
   &:after {
     content: "";
@@ -71,9 +71,9 @@ export default {
     top: 13px;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
-    height: 38px;
+    height: 17px;
     width: 2px;
-    background-color: #fff;
+    background-color: #5c5959;
   }
 }
 

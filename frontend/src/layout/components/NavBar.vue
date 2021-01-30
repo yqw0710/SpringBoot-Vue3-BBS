@@ -97,7 +97,7 @@ header {
 
   > input {
     width: 100%;
-    height: 40px;
+    height: 35px;
     padding: 0 20px 0 10px;
 
     border: none;
@@ -114,8 +114,8 @@ header {
   > button {
     position: absolute;
     right: 0;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 
     border: none;
     outline: none;
@@ -133,6 +133,7 @@ header {
 
 .btn-post {
   color: #f6f6f6;
+  height: 35px;
   font-weight: 500;
   padding: 0 20px;
 }
