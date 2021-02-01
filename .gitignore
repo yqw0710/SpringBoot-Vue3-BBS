@@ -6,7 +6,7 @@ HELP.md
 !**/src/test/**/target/
 node_modules
 /dist
-
+/target
 ### STS ###
 .apt_generated
 .classpath
