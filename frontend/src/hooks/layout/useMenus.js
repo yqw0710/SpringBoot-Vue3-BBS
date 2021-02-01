@@ -1,7 +1,7 @@
 export const menus = [
   {
     value: '首页',
-    path: 'home',
+    path: '/',
     enable: true
   },
   {

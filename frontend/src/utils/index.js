@@ -1,5 +1,4 @@
 
-
 // from Vue-element-admin @PanJiaChen
 export function hasClass(ele, cls) {
   return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))

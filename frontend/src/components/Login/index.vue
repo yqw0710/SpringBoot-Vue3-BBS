@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <el-tabs v-model="activeName" :stretch="true" @tab-click="handleClick">
+    <el-tabs v-model="activeName" :stretch="true">
       <el-tab-pane name="login">
         <template #label>
           <span><i class="el-icon-user-solid"/>用户登录</span>
@@ -17,7 +17,7 @@
         <template #label>
           <span><i class="el-icon-camera"/>扫码登录</span>
         </template>
-        扫码
+        扫码。。。
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -35,17 +35,22 @@ export default {
   },
   setup() {
     const activeName = ref('login')
-    const handleClick = (tab, event) => {
-      // console.log(tab, event);
-    }
-    return {activeName, handleClick}
+    return {activeName}
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login {
   min-width: 350px;
   margin: 0 5px;
+}
+
+.login-btn {
+  width: 100%;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+  justify-content: center;
 }
 </style>

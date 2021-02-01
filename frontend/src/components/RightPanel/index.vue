@@ -1,7 +1,6 @@
 <template>
   <div ref="rightPanel" class="show rightPanel">
-    <button v-drag="'vertical'" class="rightPanel-button"
-            @click="show=!show">
+    <button v-drag="'vertical'" class="rightPanel-button" @click="show=!show">
       <i :class="show?'el-icon-close':'el-icon-setting'"/>
     </button>
     <div class="rightPanel-content">

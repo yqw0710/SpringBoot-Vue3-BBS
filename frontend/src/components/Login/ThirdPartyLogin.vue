@@ -21,9 +21,10 @@ export default {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 0.9rem;
 
   &:before {
+    margin-top: 3px;
     content: "第三方登录";
   }
 

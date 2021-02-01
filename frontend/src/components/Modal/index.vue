@@ -1,7 +1,7 @@
 <template>
   <teleport to="#app" :disabled="false">
     <div v-if="show" class="modal">
-      <div v-drag class="modal-wrapper">
+      <div class="modal-wrapper">
         <div class="modal-header">
           <button @click="$emit('update:show',false)" class="modal-close-btn"><i
               class="el-icon-close"/></button>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-// use  <modal v-model:show="true/false"> xxxx </modal>
+// 自定义模态框 use  <modal v-model:show="true/false"> xxxx </modal>
 export default {
   name: "Modal",
   props: {
@@ -46,7 +46,6 @@ export default {
   transform: translate(-50%, -50%);
   min-width: 250px;
   max-width: 100%;
-  border: 1px solid black;
   border-radius: 5px;
   background-color: #ececec;
   padding: 10px;

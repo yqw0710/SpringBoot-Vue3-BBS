@@ -14,15 +14,15 @@ export default {
 .app-main {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 60px);
-  overflow: hidden;
+  // why 70px: header 60px and .app-container margin-top:10px
+  min-height: calc(100vh - 70px);
 }
 
 .app-container {
   padding: 0 15px;
   margin: 10px auto;
   width: 1000px;
-  box-shadow: $box-shadow-base;
+  // box-shadow: $box-shadow-base;
 }
 
 </style>

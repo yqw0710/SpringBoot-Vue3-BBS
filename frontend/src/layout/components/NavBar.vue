@@ -2,69 +2,59 @@
   <header>
     <div class="navbar">
       <a style="height: 60px" href="#">
-        <img height="60"
-             src="~@/assets/images/logo.png"
-             alt=""></a>
-      <el-menu
-          background-color="transparent"
-          :default-active="activeIndex"
-          mode="horizontal"
-          :router="true"
-      >
+        <img height="60" alt="" src="~@/assets/images/logo.png">
+      </a>
+      <!-- 动态渲染主页菜单-->
+      <el-menu background-color="transparent" mode="horizontal"
+               :default-active="activeIndex" :router="true">
         <el-menu-item v-for="menu in menus" :key="menu.path"
                       :disabled="!menu.enable" :index="menu.path">
           {{ menu.value }}
         </el-menu-item>
       </el-menu>
       <div class="search">
-        <input
-            type="text"
-            name="search"
-            placeholder="search"
-        >
-        <button>
-          <i class="el-icon-search"/>
-        </button>
+        <input type="text" name="search" placeholder="search">
+        <button><i class="el-icon-search"/></button>
       </div>
-      <button class="btn btn-post">发帖</button>
-      <div class="self">
-        <el-menu
-            v-if="true"
-            background-color="transparent"
-            :default-active="activeIndex"
-            mode="horizontal"
-        >
-          <el-menu-item index="8"><i class="el-icon-bell"/></el-menu-item>
-          <el-menu-item index="9"><i class="el-icon-chat-dot-round"/>
+      <button class="btn btn-post"><i class="el-icon-edit"/>发帖</button>
+      <div>
+        <el-menu v-if="logined" :default-active="activeIndex"
+                 mode="horizontal" :router="true"
+                 background-color="transparent">
+          <el-menu-item index="notice"><i class="el-icon-bell"/></el-menu-item>
+          <el-menu-item index="talk"><i class="el-icon-chat-dot-round"/>
           </el-menu-item>
-
           <el-submenu :popper-class="'self-menu-pop'" index="2">
             <template #title>
-              <img class="avatar"
-                   src="~@/assets/images/dio.jpg"
-                   alt="avatar">
+              <img class="avatar" :src="avatarUrl" alt="avatar">
             </template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
+            <el-menu-item index="space">个人中心</el-menu-item>
+            <el-menu-item index="profile">查看信息</el-menu-item>
+            <el-menu-item index="todo">TODO</el-menu-item>
           </el-submenu>
         </el-menu>
-        <a href="#" v-else>登录/注册</a>
+        <a v-else href="#" @click="showLogin = true">登录/注册</a>
       </div>
     </div>
   </header>
 </template>
 
 <script>
-import {ref} from "vue";
+import {inject, ref} from "vue";
 import useMenus from "@/hooks/layout/useMenus"
+import {useStore} from 'vuex'
+import {useRoute} from 'vue-router'
 
 export default {
   name: "NavBar",
   setup() {
-    const activeIndex = ref("1");
     const {menus} = useMenus();
-    return {activeIndex, menus};
+    const store = useStore();
+    const activeIndex = ref(useRoute().path);
+    const showLogin = inject("showLogin")
+    const logined = store.getters.logined;
+    const avatarUrl = store.getters.avatar;
+    return {activeIndex, menus, logined, showLogin, avatarUrl};
   },
 }
 </script>
@@ -74,7 +64,6 @@ export default {
 header {
   z-index: 100;
   position: relative;
-  overflow: hidden;
 
   min-width: 1000px;
   box-shadow: 0 1px 3px 0 #dccfcf;
@@ -91,6 +80,7 @@ header {
   max-width: $container-max-width;
 }
 
+// 搜索功能
 .search {
   width: 150px;
   position: relative;
@@ -131,11 +121,11 @@ header {
   }
 }
 
+// 发帖按钮
 .btn-post {
   color: #f6f6f6;
   height: 35px;
   font-weight: 500;
   padding: 0 20px;
 }
-
 </style>

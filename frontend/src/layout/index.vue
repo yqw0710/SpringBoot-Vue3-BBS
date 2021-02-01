@@ -19,6 +19,9 @@
         </el-switch>
         <hr>
       </right-panel>
+      <modal v-model:show="dialogVisible">
+        <login/><!-- 还不会全局注册，会了在来 -->
+      </modal>
     </div>
   </div>
 </template>
@@ -27,19 +30,24 @@
 import NavBar from "@/layout/components/NavBar";
 import AppMain from "@/layout/components/AppMain"
 import RightPanel from "@/components/RightPanel"
-import {computed} from "vue";
+import Modal from "@/components/Modal";
+import Login from "@/components/Login";
+import {computed, provide, ref} from "vue";
 import {useStore} from "vuex";
 
 export default {
   name: "index",
-  components: {NavBar, AppMain, RightPanel},
+  components: {NavBar, AppMain, RightPanel, Modal, Login},
   setup() {
     const store = useStore();
+    store.commit("user/loadInfo");
+    const dialogVisible = ref(false);
+    provide('showLogin', dialogVisible);
     const theme = computed({
-      get: () => store.state.settings.theme,
+      get: () => store.getters.theme,
       set: val => store.commit('settings/changeTheme', val)
     });
-    return {theme}
+    return {theme, dialogVisible}
   }
 }
 </script>
@@ -53,6 +61,6 @@ export default {
   //height: 100%;
   min-height: 100vh;
   width: 100%;
-  min-width: 1000px
+  min-width: 1000px;
 }
 </style>

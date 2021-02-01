@@ -3,7 +3,6 @@ function drag(el, binding) {
   el.onmousedown = (e) => {
     let disx = e.pageX - el.offsetLeft;
     let disy = e.pageY - el.offsetTop;
-    binding.value
     document.onmousemove = (e) => {
       moveElement(el, e, binding.value, disx, disy)
     }

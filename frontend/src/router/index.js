@@ -1,20 +1,34 @@
-import {createRouter, createWebHashHistory} from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import About from '../views/About.vue'
+import Index from '../views/index';
 import Layout from '@/layout'
 
 const routes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/home',
     children: [
       {
-        path: '/home',
-        component: () => import('@/views/Home')
+        path: '/',
+        name: 'index',
+        component: Index
       },
       {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/Home')
+      }, {
         path: 'message-board',
+        name: 'message-board',
         component: () => import('@/views/message-board')
+      }, {
+        path: 'space',
+        name: 'space',
+        component: () => import('@/views/user/space')
+      }, {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('@/views/user/profile')
       }
     ]
   },
@@ -42,8 +56,9 @@ const routes = [
   }
 ]
 
+// TODO 增加路由跳转钩子来改变Title
+
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
-  routes
+  history: createWebHashHistory(process.env.BASE_URL), routes
 })
 export default router

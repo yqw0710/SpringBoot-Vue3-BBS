@@ -1,13 +1,13 @@
 <template>
-  <el-form ref="login-form" :model="form">
-    <el-form-item size="small">
+  <el-form ref="loginForm" :rules="rules" :model="form">
+    <el-form-item required size="small" prop="username">
       <el-input
+          required v-model="form.username"
           prefix-icon="el-icon-user"
-          v-model="form.username"
           placeholder="请输入用户名"/>
     </el-form-item>
-    <el-form-item size="small">
-      <el-input prefix-icon="el-icon-lock"
+    <el-form-item required size="small" prop="password">
+      <el-input required prefix-icon="el-icon-lock"
                 v-model="form.password" show-password
                 placeholder="请输入密码"/>
     </el-form-item>
@@ -16,7 +16,7 @@
         <a class="login-email" href="#">邮箱登录</a>
         <a class="forget-password" href="#">忘记密码？</a>
       </div>
-      <button class="btn loginBtn">登录</button>
+      <button class="btn login-btn" @click="handleSubmit()">登录</button>
     </div>
     <third-party-login/>
     <p style="color: gray;padding: 5px">登录注册即遵守该网站协议 <a href="#">《balabala》</a>
@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import {reactive} from "vue"
+import {reactive, ref} from "vue"
+import {useStore} from 'vuex'
 import ThirdPartyLogin from "@/components/Login/ThirdPartyLogin";
 
 export default {
@@ -34,11 +35,24 @@ export default {
     ThirdPartyLogin
   },
   setup() {
+    const store = useStore()
     const form = reactive({
       username: '',
       password: '',
     })
-    return {form}
+    const loginForm = ref(null);
+    const rules = {
+      username: [{required: true, message: null}],
+      password: [{required: true, message: null}]
+    }
+    const handleSubmit = () => {
+      loginForm.value.validate(async valid => {
+        if (valid && await store.dispatch("user/login", form)) {
+          setTimeout(() => location.reload(), 100)
+        }
+      })
+    }
+    return {form, handleSubmit, rules, loginForm}
   }
 }
 </script>
@@ -55,12 +69,6 @@ export default {
     float: right;
   }
 
-  .loginBtn {
-    width: 100%;
-    color: white;
-    border-radius: 5px;
-    margin: 10px;
-    justify-content: center;
-  }
+
 }
 </style>
