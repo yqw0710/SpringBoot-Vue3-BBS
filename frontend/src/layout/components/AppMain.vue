@@ -1,12 +1,12 @@
 <template>
   <main class="app-main">
-    <router-view class="app-container"/>
+    <router-view class="app-container" />
   </main>
 </template>
 
 <script>
 export default {
-  name: "AppMain"
+  name: 'AppMain',
 }
 </script>
 
@@ -24,5 +24,4 @@ export default {
   width: 1000px;
   // box-shadow: $box-shadow-base;
 }
-
 </style>

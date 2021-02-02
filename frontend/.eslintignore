@@ -1,0 +1,7 @@
+# eslint不需要检查的文件
+
+dist
+node_modules
+public
+src/assets
+

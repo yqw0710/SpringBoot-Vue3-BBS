@@ -56,18 +56,18 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref } from 'vue'
 export default {
-  name: "Publicity",
+  name: 'Publicity',
   setup() {
-    const activeIndex = ref("1");
+    const activeIndex = ref('1')
 
-    return { activeIndex };
+    return { activeIndex }
   },
-};
+}
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 $mainBack: #060c40;
 $mainBlud: #3366cf;
 $mainWhite: #e7e4e4;
@@ -112,7 +112,7 @@ $mainWhite: #e7e4e4;
       border: none !important;
     }
     .is-active:after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 10px;
       left: 30px;
@@ -150,7 +150,7 @@ $mainWhite: #e7e4e4;
         color: $mainWhite;
       }
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: -15px;
         left: 0;

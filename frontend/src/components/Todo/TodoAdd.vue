@@ -17,6 +17,7 @@
 
 <script>
 import { ref } from 'vue'
+
 export default {
   name: 'TodoAdd',
   setup(props, context) {
@@ -50,6 +51,7 @@ function useEmitAddTodo(tid, emit) {
   display: flex;
   align-items: center;
 }
+
 .input-add input {
   width: 100%;
   height: 46px;
@@ -63,6 +65,7 @@ function useEmitAddTodo(tid, emit) {
   font-size: 16px;
   color: #626262;
 }
+
 .input-add button {
   position: absolute;
   right: 0;
@@ -77,6 +80,7 @@ function useEmitAddTodo(tid, emit) {
   cursor: pointer;
   background: linear-gradient(#c0a5f3, #7f95f7);
 }
+
 .plus {
   display: block;
   width: 100%;

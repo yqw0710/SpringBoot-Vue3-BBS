@@ -1,39 +1,38 @@
 <template>
   <div ref="rightPanel" class="show rightPanel">
-    <button v-drag="'vertical'" class="rightPanel-button" @click="show=!show">
-      <i :class="show?'el-icon-close':'el-icon-setting'"/>
+    <button v-drag="'vertical'" class="rightPanel-button" @click="show = !show">
+      <i :class="show ? 'el-icon-close' : 'el-icon-setting'" />
     </button>
     <div class="rightPanel-content">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
-import {onMounted, ref, watch} from "vue";
+import { onMounted, ref, watch } from 'vue'
 // 或许该加个onUnmounted来移除这个dom
 export default {
-  name: "RightPanel",
+  name: 'RightPanel',
   setup() {
-    const show = ref(false);
-    const rightPanel = ref(null);
-    watch(show, value => {
+    const show = ref(false)
+    const rightPanel = ref(null)
+    watch(show, (value) => {
       if (value) {
-        rightPanel.value.style.width = '250px';
+        rightPanel.value.style.width = '250px'
       } else {
-        rightPanel.value.style.width = 0;
+        rightPanel.value.style.width = 0
       }
-    });
+    })
     onMounted(() => {
       const node = document.querySelector('#app')
       node.insertBefore(rightPanel.value, node.firstChild)
-    });
+    })
 
-    return {show, rightPanel}
-  }
+    return { show, rightPanel }
+  },
 }
 </script>
-
 
 <style lang="scss" scoped>
 .rightPanel {
@@ -47,7 +46,7 @@ export default {
 
   z-index: 40000;
   background: #e3e3e3;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .rightPanel-button {

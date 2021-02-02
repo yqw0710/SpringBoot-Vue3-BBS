@@ -2,14 +2,20 @@
   <el-form ref="loginForm" :rules="rules" :model="form">
     <el-form-item required size="small" prop="username">
       <el-input
-          required v-model="form.username"
-          prefix-icon="el-icon-user"
-          placeholder="请输入用户名"/>
+        required
+        v-model="form.username"
+        prefix-icon="el-icon-user"
+        placeholder="请输入用户名"
+      />
     </el-form-item>
     <el-form-item required size="small" prop="password">
-      <el-input required prefix-icon="el-icon-lock"
-                v-model="form.password" show-password
-                placeholder="请输入密码"/>
+      <el-input
+        required
+        prefix-icon="el-icon-lock"
+        v-model="form.password"
+        show-password
+        placeholder="请输入密码"
+      />
     </el-form-item>
     <div class="login-group">
       <div>
@@ -18,21 +24,23 @@
       </div>
       <button class="btn login-btn" @click="handleSubmit()">登录</button>
     </div>
-    <third-party-login/>
-    <p style="color: gray;padding: 5px">登录注册即遵守该网站协议 <a href="#">《balabala》</a>
+    <third-party-login />
+    <p style="color: gray;padding: 5px">
+      登录注册即遵守该网站协议
+      <a href="#">《balabala》</a>
     </p>
   </el-form>
 </template>
 
 <script>
-import {reactive, ref} from "vue"
-import {useStore} from 'vuex'
-import ThirdPartyLogin from "@/components/Login/ThirdPartyLogin";
+import { reactive, ref } from 'vue'
+import { useStore } from 'vuex'
+import ThirdPartyLogin from '@/components/Login/ThirdPartyLogin'
 
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   components: {
-    ThirdPartyLogin
+    ThirdPartyLogin,
   },
   setup() {
     const store = useStore()
@@ -40,20 +48,20 @@ export default {
       username: '',
       password: '',
     })
-    const loginForm = ref(null);
+    const loginForm = ref(null)
     const rules = {
-      username: [{required: true, message: null}],
-      password: [{required: true, message: null}]
+      username: [{ required: true, message: null }],
+      password: [{ required: true, message: null }],
     }
     const handleSubmit = () => {
-      loginForm.value.validate(async valid => {
-        if (valid && await store.dispatch("user/login", form)) {
+      loginForm.value.validate(async (valid) => {
+        if (valid && (await store.dispatch('user/login', form))) {
           setTimeout(() => location.reload(), 100)
         }
       })
     }
-    return {form, handleSubmit, rules, loginForm}
-  }
+    return { form, handleSubmit, rules, loginForm }
+  },
 }
 </script>
 
@@ -68,7 +76,5 @@ export default {
     font-size: 0.85rem;
     float: right;
   }
-
-
 }
 </style>

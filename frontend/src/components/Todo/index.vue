@@ -12,22 +12,22 @@
 /*
 学习资源：https://www.zxuqian.cn/docs/videos/vue/develop-a-todo-app-using-vue3
 */
-import { defineComponent } from "vue";
-import TodoAdd from "./TodoAdd";
-import TodoFilter from "./TodoFilter";
-import TodoList from "./TodoList";
-import useTodos from "@/hooks/Todo/useTodos";
-import useFilteredTodos from "@/hooks/Todo/useFilteredTodos";
+import { defineComponent } from 'vue'
+import TodoAdd from './TodoAdd'
+import TodoFilter from './TodoFilter'
+import TodoList from './TodoList'
+import useTodos from '@/hooks/Todo/useTodos'
+import useFilteredTodos from '@/hooks/Todo/useFilteredTodos'
 
 export default defineComponent({
-  name: "Todo",
+  name: 'Todo',
   components: { TodoAdd, TodoFilter, TodoList },
   setup() {
-    const { todos, addTodo } = useTodos();
-    const { filter, filteredTodos } = useFilteredTodos(todos);
-    return { todos, addTodo, filteredTodos, filter };
+    const { todos, addTodo } = useTodos()
+    const { filter, filteredTodos } = useFilteredTodos(todos)
+    return { todos, addTodo, filteredTodos, filter }
   },
-});
+})
 </script>
 
 <style scoped>
@@ -41,6 +41,7 @@ export default defineComponent({
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.15);
   background-color: rgb(245, 246, 252); /* 淡紫灰色*/
 }
+
 h1 {
   margin: 16px 0;
   font-size: 28px;

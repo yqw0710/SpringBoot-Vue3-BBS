@@ -1,13 +1,11 @@
 <template>
-  <div id="index">11</div>
+  <div>404</div>
 </template>
 
 <script>
 export default {
-name:'index',
+  name: 'NotFound',
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

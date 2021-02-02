@@ -2,8 +2,11 @@
   <div id="MessageBoard">
     <div class="MessageBoard-top">
       <h2 style="text-align: center">🎉:欢迎给该网站留下建设性的意见❤</h2>
-      <img class="pic" alt="noteTaking"
-        src="~@/assets/images/note_taking.svg"/>
+      <img
+        class="pic"
+        alt="noteTaking"
+        src="~@/assets/images/note_taking.svg"
+      />
     </div>
     <message-add />
     <message-list />
@@ -11,16 +14,16 @@
 </template>
 
 <script>
-import MessageAdd from "@/views/message-board/components/MessageAdd";
-import MessageList from "@/views/message-board/components/MessageList";
+import MessageAdd from '@/views/message-board/components/MessageAdd'
+import MessageList from '@/views/message-board/components/MessageList'
 // TODO 加载更多
 export default {
-  name: "MessageBoard",
+  name: 'MessageBoard',
   components: { MessageAdd, MessageList },
   setup() {
-    return {};
+    return {}
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

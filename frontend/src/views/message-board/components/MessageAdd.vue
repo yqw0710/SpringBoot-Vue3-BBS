@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
-import EmotionBox from "@/components/EmotionBox";
-import { postMessage } from "@/api/message.js";
+import { reactive } from 'vue'
+import EmotionBox from '@/components/EmotionBox'
+import { postMessage } from '@/api/message.js'
 // 如果输入框的内容不够，让按钮禁用
 export default {
-  name: "MessageAdd",
+  name: 'MessageAdd',
   components: { EmotionBox },
   props: {
     // 要对留言回复的那条留言的id
@@ -50,23 +50,23 @@ export default {
     // 对父级留言则,2个相同
     parentId: { type: Number, default: 0 },
   },
-  setup(props,{emit}) {
+  setup(props, { emit }) {
     let form = reactive({
-      content: "",
-      nickname: "",
+      content: '',
+      nickname: '',
       parentId: props.parentId,
       toName: props.toName,
       toId: props.toId,
-    });
+    })
     const handleSubmit = () => {
-      postMessage(form).then(res=>{
-        console.log(res);
-        emit('message-add',true);
+      postMessage(form).then((res) => {
+        console.log(res)
+        emit('message-add', true)
       })
-    };
-    return { handleSubmit, form };
+    }
+    return { handleSubmit, form }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

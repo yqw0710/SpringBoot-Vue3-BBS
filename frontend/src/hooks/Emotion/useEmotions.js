@@ -10,17 +10,19 @@ export function useProcessEmotion(str) {
       return words
     }
   })
-};
+}
 
 export function useEmotions(type) {
   if (type === 'wechat') {
-    let arr = [];
-    emotionList.weChatList.map((item, index) => arr.push({
-      name: `[${item}]`,
-      url: `<img title="${item}" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif">`
-    }))
+    let arr = []
+    emotionList.weChatList.map((item, index) =>
+      arr.push({
+        name: `[${item}]`,
+        url: `<img title="${item}" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif">`,
+      })
+    )
     return arr
   } else if (type === 'kaomoji') {
     return emotionList.kaomojiList
-  } else return null;
+  } else return null
 }

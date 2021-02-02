@@ -3,11 +3,12 @@
     <div v-if="show" class="modal">
       <div class="modal-wrapper">
         <div class="modal-header">
-          <button @click="$emit('update:show',false)" class="modal-close-btn"><i
-              class="el-icon-close"/></button>
+          <button @click="$emit('update:show', false)" class="modal-close-btn">
+            <i class="el-icon-close" />
+          </button>
         </div>
         <div class="modal-body">
-          <slot/>
+          <slot />
         </div>
       </div>
     </div>
@@ -17,12 +18,12 @@
 <script>
 // 自定义模态框 use  <modal v-model:show="true/false"> xxxx </modal>
 export default {
-  name: "Modal",
+  name: 'Modal',
   props: {
     show: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   emits: ['update:show'],
 }
@@ -36,7 +37,7 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 2002;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .modal-wrapper {
@@ -64,7 +65,7 @@ export default {
   color: #5c5959;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     left: 11px;
     top: 13px;
@@ -75,6 +76,4 @@ export default {
     background-color: #5c5959;
   }
 }
-
-
 </style>

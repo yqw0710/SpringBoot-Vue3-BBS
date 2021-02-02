@@ -2,35 +2,34 @@ export const menus = [
   {
     value: '首页',
     path: '/',
-    enable: true
+    enable: true,
   },
   {
     value: '阅读',
     path: 'read',
-    enable: true
+    enable: true,
   },
   {
     value: '教程',
     path: 'tutorial',
-    enable: true
+    enable: true,
   },
   {
     value: '排行',
     path: 'rank',
-    enable: true
+    enable: true,
   },
   {
     value: '留言',
     path: 'message-board',
-    enable: true
+    enable: true,
   },
   {
     value: '活动',
     path: 'activity',
-    enable: false
+    enable: false,
   },
 ]
 export default function useMenus() {
-  return {menus}
+  return { menus }
 }
-

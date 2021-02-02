@@ -13,9 +13,11 @@ import http from '@/api/http'
 import '@/styles/common.scss'
 
 const app = createApp(App)
-app.directive('drag', drag)
-  .directive('default-img', defaultImg)
+app.directive('drag', drag).directive('default-img', defaultImg)
 app.config.globalProperties.$_ = _
 app.config.globalProperties.$http = http
-app.use(ElementPlus, { locale }).use(store).use(router).mount('#app')
-
+app
+  .use(ElementPlus, { locale })
+  .use(store)
+  .use(router)
+  .mount('#app')

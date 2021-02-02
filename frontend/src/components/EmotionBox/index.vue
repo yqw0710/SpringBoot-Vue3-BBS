@@ -5,33 +5,41 @@
     </slot>
     <div v-show="show" class="emotion-wrapper">
       <p style="font-size: 0.8rem">{{ currentEmotion }}</p>
-      <div class="emotion-container" v-if="current==='wechat'">
-        <span v-for="(item, index) in wechat" :key="'w:'+index"
-              class="emotion" v-html="item.url"
-              @click.stop="$emit('emotion-add',item.name)"/>
+      <div class="emotion-container" v-if="current === 'wechat'">
+        <span
+          v-for="(item, index) in wechat"
+          :key="'w:' + index"
+          class="emotion"
+          v-html="item.url"
+          @click.stop="$emit('emotion-add', item.name)"
+        />
       </div>
-      <div class="emotion-container" v-else-if="current==='kaomoji'">
-        <span v-for="(item, index) in kaomoji" :key="'k:'+index"
-              class="emotion" v-html="item"
-              @click.stop="$emit('emotion-add',item)"/>
+      <div class="emotion-container" v-else-if="current === 'kaomoji'">
+        <span
+          v-for="(item, index) in kaomoji"
+          :key="'k:' + index"
+          class="emotion"
+          v-html="item"
+          @click.stop="$emit('emotion-add', item)"
+        />
       </div>
       <div class="emotion-tabs">
-        <a @click.stop="current='wechat'"> 微信表情</a>
-        <a @click.stop="current='kaomoji'"> 颜文字</a>
+        <a @click.stop="current = 'wechat'">微信表情</a>
+        <a @click.stop="current = 'kaomoji'">颜文字</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {useEmotions} from "@/hooks/Emotion/useEmotions";
-import {computed, ref} from "vue";
+import { useEmotions } from '@/hooks/Emotion/useEmotions'
+import { computed, ref } from 'vue'
 
 export default {
-  name: "EmotionBox",
+  name: 'EmotionBox',
   emits: ['emotion-add'],
   setup() {
-    let show = ref(false);
+    let show = ref(false)
     let current = ref('wechat')
     let wechat = useEmotions('wechat')
     let kaomoji = useEmotions('kaomoji')
@@ -47,11 +55,12 @@ export default {
       show.value = !show.value
     }
     const currentEmotion = computed(() => {
-      if (current.value === 'wechat') return "微信表情"
-      else if (current.value === 'kaomoji') return "颜文字"
-    });
-    return {show, wechat, kaomoji, current, currentEmotion, handleClick}
-  }
+      if (current.value === 'wechat') return '微信表情'
+      else if (current.value === 'kaomoji') return '颜文字'
+      else return 'unknown'
+    })
+    return { show, wechat, kaomoji, current, currentEmotion, handleClick }
+  },
 }
 </script>
 
@@ -121,7 +130,6 @@ export default {
     color: $primary-text-color;
     background-color: #e2e2e2;
     z-index: 10;
-
   }
 }
 </style>

@@ -1,14 +1,10 @@
-<template>
-
-</template>
+<template><div>profile</div></template>
 
 <script>
 // http://fanyibar.top/profile
 export default {
-  name: "profile"
+  name: 'profile',
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

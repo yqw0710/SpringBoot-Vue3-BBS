@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import TodoListItem from "./TodoListItem";
+import TodoListItem from './TodoListItem'
+
 export default {
-  name: "TodoList",
+  name: 'TodoList',
   components: { TodoListItem },
-  props: ["todos"],
-};
+  props: ['todos'],
+}
 </script>
 
-<style  scoped>
+<style scoped>
 .todo-list {
   display: grid;
   row-gap: 14px;
   max-height: 250px;
   overflow: auto;
 }
-
 </style>

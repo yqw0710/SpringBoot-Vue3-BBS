@@ -1,6 +1,5 @@
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'
 export default function useFilteredTodos(todos) {
-
   const filter = ref('all')
   const filteredTodos = computed(() => {
     switch (filter.value) {
@@ -12,5 +11,5 @@ export default function useFilteredTodos(todos) {
         return todos.value
     }
   })
-  return { filter, filteredTodos };
+  return { filter, filteredTodos }
 }

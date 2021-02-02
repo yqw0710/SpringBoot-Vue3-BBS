@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
 export default {
   name: 'TodoFilter',
   props: ['selected'],
@@ -46,6 +45,7 @@ export default {
   transition: 0.8s;
   cursor: pointer;
 }
+
 /* 选中状态 让字体颜色更深,字体缩放1.2倍*/
 .filters .filter.active {
   color: #6b729c;

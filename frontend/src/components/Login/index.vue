@@ -3,19 +3,28 @@
     <el-tabs v-model="activeName" :stretch="true">
       <el-tab-pane name="login">
         <template #label>
-          <span><i class="el-icon-user-solid"/>用户登录</span>
+          <span>
+            <i class="el-icon-user-solid" />
+            用户登录
+          </span>
         </template>
-        <LoginForm/>
+        <LoginForm />
       </el-tab-pane>
       <el-tab-pane name="register">
         <template #label>
-          <span><i class="el-icon-plus"/>账号注册</span>
+          <span>
+            <i class="el-icon-plus" />
+            账号注册
+          </span>
         </template>
-        <RegisterForm/>
+        <RegisterForm />
       </el-tab-pane>
       <el-tab-pane name="qr-code">
         <template #label>
-          <span><i class="el-icon-camera"/>扫码登录</span>
+          <span>
+            <i class="el-icon-camera" />
+            扫码登录
+          </span>
         </template>
         扫码。。。
       </el-tab-pane>
@@ -24,19 +33,20 @@
 </template>
 
 <script>
-import {ref} from "vue";
-import LoginForm from "@/components/Login/LoginForm";
-import RegisterForm from "@/components/Login/RegisterForm";
+import { ref } from 'vue'
+import LoginForm from '@/components/Login/LoginForm'
+import RegisterForm from '@/components/Login/RegisterForm'
 
 export default {
-  name: "index",
+  name: 'index',
   components: {
-    LoginForm, RegisterForm
+    LoginForm,
+    RegisterForm,
   },
   setup() {
     const activeName = ref('login')
-    return {activeName}
-  }
+    return { activeName }
+  },
 }
 </script>
 

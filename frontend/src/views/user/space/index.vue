@@ -1,14 +1,10 @@
-<template>
-
-</template>
+<template><div>space</div></template>
 
 <script>
 //http://fanyibar.top/space/8
 export default {
-  name: "Space"
+  name: 'Space',
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -41,7 +41,9 @@ a {
   height: 40px;
   border-radius: 50%;
 }
-
+.test{
+  border: 3px solid darkred;
+}
 // css3 自定义滚动条 https://www.jianshu.com/p/c2addb233acd
 // 自定义滚动条介绍 https://www.cnblogs.com/ranyonsue/p/9487599.html
 ::-webkit-scrollbar {
@@ -92,7 +94,7 @@ a {
 }
 
 .el-menu--popup {
-  min-width: 150px;
+  min-width: 120px;
 }
 
 .el-tabs__item {
