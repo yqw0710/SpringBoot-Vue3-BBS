@@ -8,7 +8,7 @@
         src="~@/assets/images/note_taking.svg"
       />
     </div>
-    <message-add />
+    <message-add @message-add="refresh" />
     <message-list />
   </div>
 </template>
@@ -16,12 +16,14 @@
 <script>
 import MessageAdd from '@/views/message-board/components/MessageAdd'
 import MessageList from '@/views/message-board/components/MessageList'
-// TODO 加载更多
 export default {
   name: 'MessageBoard',
   components: { MessageAdd, MessageList },
   setup() {
-    return {}
+    const refresh = function() {
+      console.log('刷新')
+    }
+    return { refresh }
   },
 }
 </script>

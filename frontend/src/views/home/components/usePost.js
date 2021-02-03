@@ -20,9 +20,8 @@ export const postCategory = [
     value: 'notice',
   },
 ]
-
+// 等待后端写完接口
 export function getPostList(category) {
-  console.log(category)
   let postList = {
     records: [
       {

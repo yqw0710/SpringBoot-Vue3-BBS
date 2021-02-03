@@ -32,6 +32,7 @@
         <el-menu
           v-if="logined"
           :default-active="activeIndex"
+          unique-opened
           mode="horizontal"
           :router="true"
           background-color="transparent"
@@ -42,11 +43,12 @@
           </el-menu-item>
           <el-submenu :popper-class="'self-menu-pop'" index="2">
             <template #title>
-              <img class="avatar" :src="avatarUrl" alt="avatar" />
+              <img class="avatar" :src="avatar" alt="avatar" />
             </template>
-            <el-menu-item index="space">个人中心</el-menu-item>
-            <el-menu-item index="profile">查看信息</el-menu-item>
-            <el-menu-item index="todo">TODO</el-menu-item>
+            <el-menu-item :index="'/space/' + uid">个人中心</el-menu-item>
+            <el-menu-item index="/profile">查看信息</el-menu-item>
+            <el-menu-item @click="logout">登出账户</el-menu-item>
+            <el-menu-item index="/todo">TODO</el-menu-item>
           </el-submenu>
         </el-menu>
         <a v-else href="#" @click="showLogin = true">登录/注册</a>
@@ -56,7 +58,7 @@
 </template>
 
 <script>
-import { inject, ref } from 'vue'
+import { inject, ref, toRefs, watch } from 'vue'
 import useMenus from '@/hooks/layout/useMenus'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
@@ -66,11 +68,22 @@ export default {
   setup() {
     const { menus } = useMenus()
     const store = useStore()
-    const activeIndex = ref(useRoute().path)
+    let route = useRoute()
+    const activeIndex = ref(route.path)
     const showLogin = inject('showLogin')
-    const logined = store.getters.logined
-    const avatarUrl = store.getters.avatar
-    return { activeIndex, menus, logined, showLogin, avatarUrl }
+    const logined = ref(store.getters.logined)
+    const avatar = ref(null)
+    const uid = ref(null)
+    if (logined.value) {
+      avatar.value = store.getters.avatar
+      uid.value = store.getters.uid
+    }
+    const logout = () => {
+      alert('logout!')
+      store.commit('user/logout')
+      location.href = '/'
+    }
+    return { activeIndex, menus, logout, logined, showLogin, avatar, uid }
   },
 }
 </script>
@@ -82,17 +95,16 @@ header {
 
   min-width: 1000px;
   box-shadow: 0 1px 3px 0 #dccfcf;
-}
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  width: auto;
-  height: 60px;
-  margin: 0 auto;
-  max-width: $container-max-width;
+    width: auto;
+    height: 60px;
+    margin: 0 auto;
+    max-width: $container-max-width;
+  }
 }
 
 // 搜索功能

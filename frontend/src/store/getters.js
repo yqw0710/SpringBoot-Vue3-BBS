@@ -3,6 +3,8 @@ export default {
   logined: (state) => !!state.user.token,
   // 用户头像
   avatar: (state) => state.user.avatar,
+  // uid
+  uid: (state) => state.user.uid,
   // 用户昵称
   nickname: (state) => state.user.nickname,
   // 当前主题

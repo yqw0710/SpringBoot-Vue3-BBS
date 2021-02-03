@@ -1,8 +1,13 @@
 import { login, register } from '@/api/user'
-import { getToken, setToken } from '@/utils/auth'
+import { getToken, removeToken, setToken } from '@/utils/auth'
 import { ElMessage } from 'element-plus'
 
 const SUCCESS_CODE = 200
+const updateLocalstorage = (field, val) => {
+  let temp = JSON.parse(localStorage.getItem('info'))
+  temp[field] = val
+  localStorage.setItem('info', JSON.stringify(temp))
+}
 const user = {
   namespaced: true,
   state: {
@@ -22,11 +27,24 @@ const user = {
       setToken(data.token)
       localStorage.setItem('info', JSON.stringify(state))
     },
+    // 从localStorage载入存储的用户信息
     loadInfo(state) {
+      if (!getToken()) return
       let temp = JSON.parse(localStorage.getItem('info'))
       for (let key in temp) {
         state[key] = temp[key]
       }
+    },
+    // 更新头像
+    updateAvatar(state, data) {
+      state.avatar = data
+      updateLocalstorage('avatar', data)
+    },
+    // 用户登出 清除保存的数据
+    logout(state) {
+      removeToken()
+      state.token = null
+      localStorage.clear()
     },
   },
   actions: {

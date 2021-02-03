@@ -20,7 +20,12 @@
       </div>
     </div>
     <div class="item-content">{{ model.content }}</div>
-    <div class="item-footer">👀{{ 1 }}|👍{{ 11 }}|💬{{ 0 }}</div>
+    <div class="item-footer">
+      <span>👀{{ 1 }}</span>
+      <span>👍{{ 11 }}</span>
+      <span>💬{{ 0 }}</span>
+      <span class="time">2020/2/3</span>
+    </div>
   </div>
 </template>
 
@@ -37,8 +42,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/styles/_mixins';
 .PostPreview-item {
-  padding: 5px 2px;
-  margin: 2px;
+  padding: 10px 2px;
   transition: 0.3s;
   border-bottom: 1px solid #cbcbcb;
   &:hover {
@@ -51,8 +55,10 @@ export default {
   .item-header-content {
     margin-left: 5px;
     .item-title {
+      color: inherit;
       display: block;
       font-size: 1.05rem;
+      font-weight: bold;
     }
     .item-user {
       margin: 0 5px;
@@ -67,11 +73,18 @@ export default {
 }
 
 .item-content {
-  font-size: 0.9rem;
-  margin: 5px 0;
+  font-size: 0.95rem;
+  margin: 10px 0;
+  //padding: 13px 0;
   @include ellipsis(3);
 }
 .item-footer {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  > span {
+    margin-right: 10px;
+  }
+  > .time {
+    float: right;
+  }
 }
 </style>

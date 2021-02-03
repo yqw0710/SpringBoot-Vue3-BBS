@@ -6,27 +6,27 @@ export const menus = [
   },
   {
     value: '阅读',
-    path: 'read',
+    path: '/read',
     enable: true,
   },
   {
     value: '教程',
-    path: 'tutorial',
+    path: '/tutorial',
     enable: true,
   },
   {
     value: '排行',
-    path: 'rank',
+    path: '/rank',
     enable: true,
   },
   {
     value: '留言',
-    path: 'message-board',
+    path: '/message-board',
     enable: true,
   },
   {
     value: '活动',
-    path: 'activity',
+    path: '/activity',
     enable: false,
   },
 ]

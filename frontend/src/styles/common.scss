@@ -25,14 +25,14 @@ a {
   outline: none;
 
   font-size: 14px;
-  color: #323232;
+  color: white;
   background-color: $primary-color;
 
-  transition: .2s;
+  transition: 0.2s;
 
   &:active {
     transform: scale(0.98);
-    background-color: #036EB8;
+    background-color: #036eb8;
   }
 }
 
@@ -41,9 +41,12 @@ a {
   height: 40px;
   border-radius: 50%;
 }
-.test{
+.test {
   border: 3px solid darkred;
 }
+
+
+
 // css3 自定义滚动条 https://www.jianshu.com/p/c2addb233acd
 // 自定义滚动条介绍 https://www.cnblogs.com/ranyonsue/p/9487599.html
 ::-webkit-scrollbar {
@@ -56,14 +59,14 @@ a {
   /*滚动条里面小方块*/
   background-color: skyblue;
   background-image: -webkit-linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.2) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.2) 75%,
-      transparent 75%,
-      transparent
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
   );
 }
 
@@ -78,7 +81,7 @@ a {
   font-size: 16px;
   padding: 0 15px;
   text-align: center;
-
+  transition: none;
   &:hover {
     //border-top-right-radius: 40%;
     background-color: transparent !important;
@@ -90,11 +93,12 @@ a {
 
   .is-active {
     font-weight: bold;
+    border: none !important;
   }
 }
 
 .el-menu--popup {
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .el-tabs__item {

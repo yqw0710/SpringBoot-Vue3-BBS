@@ -5,7 +5,7 @@
       <nav-bar />
       <app-main />
       <right-panel>
-        <h2>网页设置(test)</h2>
+        <h2>网页设置(Temp)</h2>
         <hr />
         <el-switch
           v-model="theme"
@@ -40,20 +40,20 @@ export default {
   components: { NavBar, AppMain, RightPanel, Modal, Login },
   setup() {
     const store = useStore()
-    store.commit('user/loadInfo')
     const dialogVisible = ref(false)
-    provide('showLogin', dialogVisible)
     const theme = computed({
       get: () => store.getters.theme,
       set: (val) => store.commit('settings/changeTheme', val),
     })
+    store.commit('user/loadInfo')
+    provide('showLogin', dialogVisible)
     return { theme, dialogVisible }
   },
 }
 </script>
 
 <style lang="scss">
-@import '@/styles/theme';
+@import '~@/styles/theme';
 
 .app-wrapper {
   @include mytheme();

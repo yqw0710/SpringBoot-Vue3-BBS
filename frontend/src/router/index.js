@@ -15,17 +15,17 @@ const routes = [
       },
 
       {
-        path: 'message-board',
+        path: '/message-board',
         name: 'message-board',
         component: () => import('@/views/message-board'),
       },
       {
-        path: 'space',
+        path: '/space/:uid',
         name: 'space',
         component: () => import('@/views/user/space'),
       },
       {
-        path: 'profile',
+        path: '/profile',
         name: 'profile',
         component: () => import('@/views/user/profile'),
       },

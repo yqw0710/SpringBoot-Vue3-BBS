@@ -1,4 +1,5 @@
 import defaultAvatar from '@/assets/images/dio.jpg'
+import defaultBackground from '@/assets/images/cute.jpg'
 /**
  * 检测图片是否存在
  * @param url
@@ -34,6 +35,8 @@ export default async function defaultImg(el, binding) {
   if (!exist) {
     if (params === 'avatar') {
       el.setAttribute('src', defaultAvatar)
+    } else if (params === 'background') {
+      el.setAttribute('src', defaultBackground)
     }
   }
 }

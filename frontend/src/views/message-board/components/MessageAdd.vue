@@ -10,7 +10,10 @@
     />
     <!-- 表情功能，提交按钮-->
     <div class="toolbar">
-      <EmotionBox class="emotions" @emotion-add="(val) => (content += val)" />
+      <EmotionBox
+        class="emotions"
+        @emotion-add="(val) => (form.content += val)"
+      />
       <div class="ops">
         <el-input
           v-model="form.nickname"
@@ -37,6 +40,8 @@
 import { reactive } from 'vue'
 import EmotionBox from '@/components/EmotionBox'
 import { postMessage } from '@/api/message.js'
+import { useStore } from 'vuex'
+
 // 如果输入框的内容不够，让按钮禁用
 export default {
   name: 'MessageAdd',
@@ -53,14 +58,13 @@ export default {
   setup(props, { emit }) {
     let form = reactive({
       content: '',
-      nickname: '',
+      nickname: useStore().getters.nickname || '',
       parentId: props.parentId,
       toName: props.toName,
       toId: props.toId,
     })
     const handleSubmit = () => {
       postMessage(form).then((res) => {
-        console.log(res)
         emit('message-add', true)
       })
     }

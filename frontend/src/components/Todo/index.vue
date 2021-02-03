@@ -22,6 +22,7 @@ import useFilteredTodos from '@/hooks/Todo/useFilteredTodos'
 export default defineComponent({
   name: 'Todo',
   components: { TodoAdd, TodoFilter, TodoList },
+  props: ['bespread'],
   setup() {
     const { todos, addTodo } = useTodos()
     const { filter, filteredTodos } = useFilteredTodos(todos)
@@ -32,7 +33,7 @@ export default defineComponent({
 
 <style scoped>
 .todo-container {
-  width: 75%;
+  min-width: 75%;
   max-width: 350px;
   padding: 14px 28px;
   position: absolute;

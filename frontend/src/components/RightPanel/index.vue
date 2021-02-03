@@ -45,8 +45,9 @@ export default {
   height: 100vh;
 
   z-index: 40000;
-  background: #e3e3e3;
+  background: #838383;
   transition: 0.2s;
+  box-shadow: -7px 0px 5px 0px rgb(0 0 0 / 15%);
 }
 
 .rightPanel-button {

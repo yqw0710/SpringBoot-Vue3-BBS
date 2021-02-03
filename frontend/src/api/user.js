@@ -16,6 +16,19 @@ export function getUserInfo(uid) {
   return http.get('/user/info/' + uid)
 }
 
+export function getUserInfoDigest(uid) {
+  return http.get('user/info/digest/' + uid)
+}
+
 export function isExist(type, value) {
   return http.get(`/user/exist?type=${type}&value=${value}`)
+}
+
+export function uploadAvatar(file) {
+  let param = new FormData() // 创建form对象
+  param.append('file', file) // 通过append向form对象添加数据
+  let config = {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  }
+  return http.post('file/avatar', param, config)
 }
