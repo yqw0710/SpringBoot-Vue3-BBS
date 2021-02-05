@@ -12,7 +12,8 @@
         <post-preview :category="activeTab" />
       </el-tab-pane>
     </el-tabs>
-    <div class="right" style="position: relative"><todo /></div>
+    <div class="right" style="position: relative"></div>
+        <todo />
   </div>
 </template>
 

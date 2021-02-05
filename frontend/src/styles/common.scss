@@ -44,8 +44,19 @@ a {
 .test {
   border: 3px solid darkred;
 }
-
-
+.noMore {
+  text-align: center;
+  margin-top: 10px;
+}
+.markdown-body{
+  color: inherit;
+  img{
+    display: block;
+  }
+}
+a:-webkit-any-link {
+  color: inherit;
+}
 
 // css3 自定义滚动条 https://www.jianshu.com/p/c2addb233acd
 // 自定义滚动条介绍 https://www.cnblogs.com/ranyonsue/p/9487599.html
@@ -107,4 +118,10 @@ a {
 
 .el-tabs__item.is-active {
   color: inherit;
+}
+.el-tabs {
+  box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+}
+.el-tabs__nav-scroll {
+  margin-left: 20px;
 }

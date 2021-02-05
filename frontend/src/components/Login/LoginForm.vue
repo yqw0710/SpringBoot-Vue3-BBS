@@ -22,7 +22,9 @@
         <a class="login-email" href="#">邮箱登录</a>
         <a class="forget-password" href="#">忘记密码？</a>
       </div>
-      <button class="btn login-btn" @click="handleSubmit()">登录</button>
+      <button class="btn login-btn" @click.prevent="handleSubmit()">
+        登录
+      </button>
     </div>
     <third-party-login />
     <p style="color: gray;padding: 5px">

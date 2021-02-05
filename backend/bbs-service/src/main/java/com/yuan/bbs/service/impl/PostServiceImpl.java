@@ -40,17 +40,17 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Override
     public Page<Post> getPostList(int num, int size, String category) {
-
         Page<Post> postAndPage = (StringUtils.hasText(category) && !category.equalsIgnoreCase("default"))
                 ? mapper.getPostAndPageWithCategory(new Page<>(num, size), category)
                 : mapper.getPostAndPage(new Page<>(num, size));
         postAndPage.getRecords().forEach(post -> {
-            // getLikes 多一个资源就要多弄一张点赞关联表以及一个落库任务等等
+            // 获取帖子的赞数（因为使用redis，所以从数据库获取后还要去redis那拿
             post.setLikes(post.getLikes() + likeService.getLikeCountByType(ItemType.POST.getType(), post.getId()));
         });
         return postAndPage;
     }
 
+    // 增加page view 先随便这么写吧。不知道咋弄
     @Override
     public void addPv(Integer pid) {
         this.update(new UpdateWrapper<Post>().eq("id", pid).setSql("pv=pv+1"));

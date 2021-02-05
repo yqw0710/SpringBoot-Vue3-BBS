@@ -10,13 +10,11 @@
         />
       </a>
       <div class="item-header-content">
-        <a href="#" class="item-title">
+        <router-link :to="'/post/' + model.id" class="item-title">
           <span class="item-user">{{ model.nickname }}:</span>
           {{ model.title }}
-        </a>
-        <el-tag size="mini">标签</el-tag>
-        |
-        <el-tag size="mini">标签</el-tag>
+        </router-link>
+        <el-tag size="mini" effect="dark">{{ model.category }}</el-tag>
       </div>
     </div>
     <div class="item-content">{{ model.content }}</div>
@@ -24,6 +22,7 @@
       <span>👀{{ 1 }}</span>
       <span>👍{{ 11 }}</span>
       <span>💬{{ 0 }}</span>
+      <span class="menu">...</span>
       <span class="time">2020/2/3</span>
     </div>
   </div>
@@ -42,9 +41,9 @@ export default {
 <style lang="scss" scoped>
 @import '~@/styles/_mixins';
 .PostPreview-item {
-  padding: 10px 2px;
+  padding: 10px 15px;
   transition: 0.3s;
-  border-bottom: 1px solid #cbcbcb;
+  border-bottom: 1px solid #efefef;
   &:hover {
     background-color: rgba(0, 0, 0, 0.02);
   }
@@ -84,6 +83,14 @@ export default {
     margin-right: 10px;
   }
   > .time {
+    float: right;
+  }
+  > .menu {
+    cursor: pointer;
+    color: #7b7b7b;
+    font-size: 1.1rem;
+    height: 20px;
+    line-height: 10px;
     float: right;
   }
 }

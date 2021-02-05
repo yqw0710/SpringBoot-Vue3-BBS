@@ -20,6 +20,26 @@ const routes = [
         component: () => import('@/views/message-board'),
       },
       {
+        path: '/read',
+        name: 'read',
+        component: () => import('@/views/article-preview'),
+      },
+      {
+        path: '/notice',
+        name: 'notice',
+        component: () => import('@/views/notice'),
+      },
+      {
+        path: '/post/:pid',
+        name: 'post',
+        component: () => import('@/views/post'),
+      },
+      {
+        path: '/article/:aid',
+        name: 'article',
+        component: () => import('@/views/article'),
+      },
+      {
         path: '/space/:uid',
         name: 'space',
         component: () => import('@/views/user/space'),

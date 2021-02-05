@@ -32,3 +32,11 @@ export function uploadAvatar(file) {
   }
   return http.post('file/avatar', param, config)
 }
+// 获取用户的通知
+export function getNotice() {
+  return http.get('/notice')
+}
+// 读取通知
+export function readNotice(id) {
+  return http.put('/notice/' + id)
+}

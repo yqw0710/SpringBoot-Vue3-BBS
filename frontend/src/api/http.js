@@ -27,7 +27,7 @@ axios.interceptors.response.use(
   (error) => {
     console.error(error)
     // let status=error.response.status TODO 根据状态码进行不同操作
-    ElMessage({ message: error.response })
+    ElMessage({ message: error.response.data.msg })
     return Promise.reject(error.response)
   }
 )
