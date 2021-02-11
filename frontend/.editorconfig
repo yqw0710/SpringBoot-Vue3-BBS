@@ -1,4 +1,5 @@
 # https://editorconfig.org
+# 编辑器代码格式规范
 root = true
 
 [*]

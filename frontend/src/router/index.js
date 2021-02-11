@@ -30,6 +30,11 @@ const routes = [
         component: () => import('@/views/notice'),
       },
       {
+        path: '/chat',
+        name: 'chat',
+        component: () => import('@/views/chat'),
+      },
+      {
         path: '/post/:pid',
         name: 'post',
         component: () => import('@/views/post'),

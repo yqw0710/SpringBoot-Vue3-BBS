@@ -13,19 +13,18 @@
       </el-tab-pane>
     </el-tabs>
     <div class="right" style="position: relative"></div>
-        <todo />
   </div>
 </template>
 
 <script>
 import PostPreview from '@/views/home/components/PostPreview'
-import Todo from '@/components/Todo'
 import { postCategory } from '@/views/home/components/usePost'
 import { ref } from 'vue'
+const url = 'ws://localhost:8080/api/ws'
 
 export default {
   name: 'Home',
-  components: { PostPreview, Todo },
+  components: { PostPreview },
   setup() {
     const activeTab = ref('default')
     return { activeTab, postCategory }
@@ -37,6 +36,7 @@ export default {
 #index {
   display: flex;
 }
+
 .right {
   flex: 1;
 }

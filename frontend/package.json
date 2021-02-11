@@ -15,10 +15,12 @@
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.20",
     "marked": "^1.2.9",
+    "stompjs": "^2.3.3",
     "vue": "^3.0.0",
     "vue-cropperjs": "^5.0.0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "websocket": "^1.0.33"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "^4.5.11",

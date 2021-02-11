@@ -4,8 +4,7 @@
     <div class="view-area">
       <content-display v-if="loaded" :article="post" />
       <hr />
-      <h1>11</h1>
-      <h1>11</h1>
+      <h2>TODO 评论区</h2>
     </div>
     <div class="sidebar">
       <h2>22</h2>
@@ -29,9 +28,13 @@ export default {
     const loaded = ref(false)
     let post = reactive({})
     getPostDetail(pid).then((res) => {
+      console.log(post)
+      console.log(loaded)
+      // 暂不知如何拷贝对象给post这个响应式对象
       post.value = res.data
       document.title = res.data.title
       loaded.value = true
+      console.log(post)
     })
     return { post, loaded }
   },

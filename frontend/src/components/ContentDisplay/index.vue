@@ -1,15 +1,15 @@
 <template>
   <article>
-    <h1 class="title">{{ article.title }}</h1>
+    <h1 class="title">{{ article.value.title }}</h1>
     <meta-info
       v-if="showInfo"
-      :date="article.gmtCreate"
-      :tags="article.tags"
-      :pv="article.pv"
-      :comments="article.comments"
-      :likes="article.likes"
+      :date="article.value.gmtCreate"
+      :tags="article.value.tags"
+      :pv="article.value.pv"
+      :comments="article.value.comments"
+      :likes="article.value.likes"
     />
-    <author-info v-if="showInfo" :uid="article.uid" />
+    <author-info v-if="showInfo" :uid="article.value.uid" />
     <div class="markdown-body" v-html="renderedContent"></div>
   </article>
 </template>
@@ -33,15 +33,10 @@ export default {
   },
   setup(props) {
     const renderedContent = marked(props.article.value.content)
+    console.log(props.article.value)
     return { renderedContent }
   },
 }
 </script>
 
-<style lang="scss" scoped>
-.markdown-body {
-  img {
-    max-width: 100%;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

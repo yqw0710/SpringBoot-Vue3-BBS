@@ -1,3 +1,4 @@
+// ESLint配置文件
 module.exports = {
   root: true,
   // 预定义的全局变量
@@ -17,6 +18,6 @@ module.exports = {
     'vue/no-v-html': 0,
     'space-before-function-paren': 0,
     'no-unused-vars': 0,
-    "camelcase": 2,//强制驼峰法命名
+    camelcase: 2, //强制驼峰法命名
   },
 }

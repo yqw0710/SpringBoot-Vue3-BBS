@@ -1,7 +1,7 @@
 <template>
   <div id="notice">
-    <el-tabs v-if="show" type="card" :tabBarGutter="10">
-      <el-tab-pane key="4" tab="评论">
+    <el-tabs v-model="activeName" v-if="show">
+      <el-tab-pane name="comment" label="评论">
         <div
           class="notice-card"
           v-for="(item, index) in commentNoticeList"
@@ -21,10 +21,10 @@
         </div>
         <el-empty v-if="commentNoticeList.length === 0" />
       </el-tab-pane>
-      <el-tab-pane key="2" tab="点赞">
+      <el-tab-pane name="like" label="点赞">
         <el-empty />
       </el-tab-pane>
-      <el-tab-pane key="1" tab="系统通知">
+      <el-tab-pane name="system" label="系统通知">
         <el-empty />
       </el-tab-pane>
       <button @click="readNotice(0)">
@@ -41,6 +41,7 @@ export default {
   name: 'notice',
   setup() {
     const show = ref(false)
+    const activeName = ref('comment')
     const commentNoticeList = reactive([])
     const likeNoticeList = reactive([])
     const systemNoticeList = reactive([])
@@ -76,6 +77,7 @@ export default {
     })
     return {
       show,
+      activeName,
       readNotice,
       commentNoticeList,
       likeNoticeList,

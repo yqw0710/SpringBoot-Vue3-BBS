@@ -1,14 +1,14 @@
 <template>
   <div class="PostPreview-item">
     <div class="item-header">
-      <a href="#">
+      <router-link :to="'/space/' + model.uid">
         <img
           :src="model.avatar"
           class="item-avatar"
           v-default-img="'avatar'"
           alt="avatar"
         />
-      </a>
+      </router-link>
       <div class="item-header-content">
         <router-link :to="'/post/' + model.id" class="item-title">
           <span class="item-user">{{ model.nickname }}:</span>
@@ -19,11 +19,11 @@
     </div>
     <div class="item-content">{{ model.content }}</div>
     <div class="item-footer">
-      <span>👀{{ 1 }}</span>
-      <span>👍{{ 11 }}</span>
-      <span>💬{{ 0 }}</span>
+      <span>👁{{ model.pv }}</span>
+      <span>👍{{ model.likes }}</span>
+      <span>💬{{ model.comments }}</span>
       <span class="menu">...</span>
-      <span class="time">2020/2/3</span>
+      <span class="time">{{ model.gmtCreate.split(' ')[0] }}</span>
     </div>
   </div>
 </template>
@@ -34,7 +34,9 @@ export default {
   props: {
     model: { type: Object, required: true },
   },
-  setup() {},
+  setup() {
+    return {}
+  },
 }
 </script>
 

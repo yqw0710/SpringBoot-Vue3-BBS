@@ -38,7 +38,7 @@
           background-color="transparent"
         >
           <el-menu-item index="notice"><i class="el-icon-bell" /></el-menu-item>
-          <el-menu-item index="talk">
+          <el-menu-item index="chat">
             <i class="el-icon-chat-dot-round" />
           </el-menu-item>
           <el-submenu :popper-class="'self-menu-pop'" index="2">
@@ -51,7 +51,9 @@
             <el-menu-item index="/todo">TODO</el-menu-item>
           </el-submenu>
         </el-menu>
-        <a v-else href="#" @click="showLogin = true">登录/注册</a>
+        <span style="cursor: pointer" v-else @click="showLogin = true">
+          登录/注册
+        </span>
       </div>
     </div>
   </header>

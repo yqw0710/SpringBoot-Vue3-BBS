@@ -59,12 +59,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public UserDto login(LoginDto dto) {
-        User user = userMapper.findByUsername(dto.getUsername());
+        User user = userMapper.findUserByUsername(dto.getUsername());
         if (user != null) {
             String EncryptedPassword = CommonUtil.md5(dto.getPassword() + user.getSalt());
             if (user.getPassword().equals(EncryptedPassword)) {
                 SecurityUtil.setUserToSecurity(user);
-                String token = jwtUtils.generateToken(user.getUsername());
+                String token = jwtUtils.generateToken( user.getId());
                 return new UserDto().setToken(token)
                         .setNickname(user.getNickname())
                         .setUsername(user.getUsername())
@@ -92,7 +92,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String username = user.getUsername();
         userinfoService.save(new Userinfo().setUid(uid));
         signService.save(new Sign().setUid(uid));
-        String token = jwtUtils.generateToken(username);
+        String token = jwtUtils.generateToken( uid);
         return new UserDto().setToken(token).setUid(uid).setNickname(username).setUsername(username);
     }
 
@@ -113,8 +113,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userMapper.findByUsername(username);
-        System.out.println(user);
+        User user = userMapper.findById(username);//这里传进来的是解析token获得的uid
         if (user == null) {  //如果数据库里没有用户名，则认证失败
             throw new UsernameNotFoundException("用户不存在");
         }

@@ -9,10 +9,11 @@ public class SecurityUtil {
      * 从SecurityContext获取被jwtFilter处理后存放的User对象
      */
     public static User getUserFromSecurity() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return user;
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
-    public static void setUserToSecurity(Object user){
+
+    public static void setUserToSecurity(Object user) {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }

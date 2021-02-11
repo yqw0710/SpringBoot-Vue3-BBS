@@ -28,7 +28,9 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select id as uid ,username,avatar,nickname,point from y_user where id=#{uid}")
     UserDto getNewest(Integer uid);
 
-    @Select("select * from y_user where username =#{username} ")
-    User findByUsername(String username);
+    @Select("select * from y_user where id =#{id}")
+    User findById(String id);
 
+    @Select("select * from y_user where username =#{username}")
+    User findUserByUsername(String username);
 }

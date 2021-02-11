@@ -33,19 +33,20 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         long start = System.currentTimeMillis();
         String token = request.getHeader(header);
         if (token != null) {
-            String username = jwtUtil.getSubject(token);
-            System.out.println("start:filter timing ms:" + (System.currentTimeMillis() - start));
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userService.loadUserByUsername(username);
+            String uid = jwtUtil.getSubject(token);
+            System.out.println("uid:"+uid);
+            System.out.println("doFilterInternal start:filter timing ms:" + (System.currentTimeMillis() - start));
+            if (uid != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = userService.loadUserByUsername(uid);
                 // 这里大概会浪费5ms的时间从数据库获取数据,想到的优化：可以从登录返回token起，就把角色用户名放到token中
                 // 然后解析token拿到这两个用来，要是要弃用token就难搞。所以可能还需要用到redis来帮一手
                 // 或者返回的类型可以改简单点
-                System.out.println("user:" + userDetails.getUsername());
+                System.out.println("doFilterInternal user:" + userDetails.getUsername());
                 SecurityUtil.setUserToSecurity(userDetails);
             }
         }
         long end = System.currentTimeMillis();
-        System.out.format("end:jwt filter total [%d] ms with %s\n", (end - start), request.getRequestURI());
+        System.out.format("doFilterInternal end:jwt filter total [%d] ms with %s\n", (end - start), request.getRequestURI());
         chain.doFilter(request, response);
     }
 }

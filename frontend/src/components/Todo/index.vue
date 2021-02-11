@@ -33,7 +33,7 @@ export default defineComponent({
 
 <style scoped>
 .todo-container {
-  min-width: 80%;
+  min-width: 70%;
   max-width: 350px;
   padding: 14px 28px;
   position: absolute;

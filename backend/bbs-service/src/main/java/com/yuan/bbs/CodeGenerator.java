@@ -90,7 +90,7 @@ public class CodeGenerator {
         };
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
-        // 自定义配置会被优先输出
+        // 自定义配置会被优先输出 FIXME 多模块的项目这里会有问题，生成的位置有问题
         focList.add(new FileOutConfig(templatePath) {
             @Override
             public String outputFile(TableInfo tableInfo) {

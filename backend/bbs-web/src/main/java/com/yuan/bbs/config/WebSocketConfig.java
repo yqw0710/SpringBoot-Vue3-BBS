@@ -1,5 +1,8 @@
 package com.yuan.bbs.config;
 
+import com.yuan.bbs.common.utils.JwtUtil;
+import com.yuan.bbs.util.SecurityUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -41,8 +44,11 @@ import java.util.Map;
  */
 @Configuration
 @EnableWebSocketMessageBroker
-@Order(Ordered.HIGHEST_PRECEDENCE + 99)//标记的自定义拦截器来完成
+//@Order(Ordered.HIGHEST_PRECEDENCE)//标记的自定义拦截器来完成
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     /**
      * 注册端点
@@ -72,28 +78,26 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/topic", "/queue");
         config.setApplicationDestinationPrefixes("/app");
-        config.setUserDestinationPrefix("/user2/");
+//        config.setUserDestinationPrefix("/user2/");
     }
 
     /**
      * 自定义建立websocket连接前的拦截器
      * 验证失败返回false拒绝本次连接
      */
-    static class StompConnectInterceptor extends HttpSessionHandshakeInterceptor {
+    class StompConnectInterceptor extends HttpSessionHandshakeInterceptor {
         @Override
         public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
             HttpServletRequest servletRequest = ((ServletServerHttpRequest) request).getServletRequest();
             String token = servletRequest.getParameter("token");
-            // System.out.println("token:" + token);
-            // token认证（临时） 是jojo0就不让建立连接
-            if ("jojo0".equalsIgnoreCase(token)) return false;
-            // 控制器中用stompHeaderAccessor.getSessionAttributes()获取下面存放的数据
-            attributes.put("username", token);
-            attributes.put("joinTime", LocalDateTime.now());
+            try {
+               jwtUtil.getSubject(token);
+            } catch (Exception e) {
+                return false;
+            }
             return super.beforeHandshake(request, response, wsHandler, attributes);
         }
     }
-
     /**
      * 设置拦截器：是连接后，对发送/接收消息前/后进行拦截处理，最下面这两个暂时没啥用
      * 1、首次连接的时候，获取其Header信息，利用Header里面的信息进行权限认证
@@ -108,20 +112,21 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      * 对发送消息/接受前后进行拦截处理、(拦截个沟8)
      * 可以查看和/或修改从MessageChannel发送和/或接收的消息。
      */
-    static class StompChannelInterceptor implements ChannelInterceptor {
+    class StompChannelInterceptor implements ChannelInterceptor {
+
         @Override
         public Message<?> preSend(Message<?> message, MessageChannel channel) {
             StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
             //1、判断是否首次连接,然后存储信息到Principal
             if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-                //2、获取用户名
-                String username = accessor.getNativeHeader("token").get(0);
+                String uid =jwtUtil.getSubject( accessor.getNativeHeader("token").get(0));
                 // 这个类可以直接作为Controller的一个参数
-                Principal principal = () -> username;
+                Principal principal = () -> uid;
                 accessor.setUser(principal);
             }
             return message;
         }
     }
+
 }
 
