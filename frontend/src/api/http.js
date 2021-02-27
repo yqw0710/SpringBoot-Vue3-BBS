@@ -2,8 +2,8 @@ import axios from 'axios'
 import { getToken } from '@/utils/auth'
 import { ElMessage } from 'element-plus'
 // 根据环境来设置请求根路径
-const BASEURL = 'http://127.0.0.1:8080/api'
-// const BASEURL = 'http://47.100.95.40:8080/api'
+// const BASEURL = 'http://127.0.0.1:8080/api'
+const BASEURL = 'http://47.100.95.40:8080/api'
 // const BASEURL = process.env.NODE_ENV === "production" ? 'http://47.100.95.40:8080/api' : 'http://localhost:8080/api';
 
 // 1. 请求根路径和超时时间

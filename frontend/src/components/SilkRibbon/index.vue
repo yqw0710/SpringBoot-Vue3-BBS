@@ -1,7 +1,7 @@
 <template>
   <span
     @click="$emit('click')"
-    style="z-index: 110;color: white"
+    style="z-index: 110; color: white"
     :class="ribbonClass"
   >
     <span style="cursor: pointer">{{ content }}</span>

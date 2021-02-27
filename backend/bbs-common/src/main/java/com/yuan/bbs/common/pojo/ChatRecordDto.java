@@ -14,7 +14,7 @@ public class ChatRecordDto {
     String content;
     LocalDateTime created;
     //  消息发送者的id
-    Integer from_id;
+    Integer fromId;
     String nickname;
     String avatar;
 

@@ -20,7 +20,7 @@ export default {
   name: 'MessageBoard',
   components: { MessageAdd, MessageList },
   setup() {
-    const refresh = function() {
+    const refresh = function () {
       console.log('刷新')
     }
     return { refresh }

@@ -12,7 +12,13 @@
         <post-preview :category="activeTab" />
       </el-tab-pane>
     </el-tabs>
-    <div class="right" style="position: relative"></div>
+    <div class="right" style="position: relative">
+      <h1>!!</h1>
+      <h1>!!</h1>
+      <h1>!!</h1>
+      <h1>!!</h1>
+      <h1>!!</h1>
+    </div>
   </div>
 </template>
 
@@ -39,5 +45,8 @@ export default {
 
 .right {
   flex: 1;
+  > h1 {
+    text-align: center;
+  }
 }
 </style>

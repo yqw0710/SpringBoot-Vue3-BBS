@@ -37,8 +37,10 @@
           :router="true"
           background-color="transparent"
         >
-          <el-menu-item index="notice"><i class="el-icon-bell" /></el-menu-item>
-          <el-menu-item index="chat">
+          <el-menu-item index="/notice">
+            <i class="el-icon-bell" />
+          </el-menu-item>
+          <el-menu-item index="/chat">
             <i class="el-icon-chat-dot-round" />
           </el-menu-item>
           <el-submenu :popper-class="'self-menu-pop'" index="2">

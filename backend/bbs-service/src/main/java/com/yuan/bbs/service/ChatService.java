@@ -1,5 +1,6 @@
 package com.yuan.bbs.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yuan.bbs.common.pojo.ChatRecordDto;
 import com.yuan.bbs.entity.Chat;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -17,4 +18,8 @@ import java.util.List;
 public interface ChatService extends IService<Chat> {
 
       List<ChatRecordDto> selectPage(Integer uid);
+
+      IPage<Chat> selectChatHistoryPage(Integer sid, Integer rid, Integer num, Integer size,Boolean readAll);
+
+      void setReadedTrue(Integer sid, Integer rid);
 }

@@ -9,9 +9,7 @@
           <a :href="'/space/' + digest.uid">{{ digest.nickname }}</a>
         </span>
         <span class="sex"></span>
-        <span class="talk">
-          📧 发送消息
-        </span>
+        <span class="talk">📧 发送消息</span>
       </span>
       <span class="sign">{{ digest.sign }}</span>
     </div>

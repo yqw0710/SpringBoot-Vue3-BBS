@@ -12,9 +12,7 @@
             {{ item.title }}
           </a>
           <p class="content">{{ item.content }}</p>
-          <span class="date">
-            2021-1-1
-          </span>
+          <span class="date">2021-1-1</span>
           <span class="opt" @click.prevent="readNotice(item.id, index)">
             确认
           </span>
@@ -27,9 +25,7 @@
       <el-tab-pane name="system" label="系统通知">
         <el-empty />
       </el-tab-pane>
-      <button @click="readNotice(0)">
-        全部已读
-      </button>
+      <button @click="readNotice(0)">全部已读</button>
     </el-tabs>
   </div>
 </template>

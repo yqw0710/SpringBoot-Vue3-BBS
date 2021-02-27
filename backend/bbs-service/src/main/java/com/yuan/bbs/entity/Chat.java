@@ -42,7 +42,7 @@ public class Chat implements Serializable {
     private String content;
 
     @ApiModelProperty(value = "是否已读,默认0未读")
-    private Boolean read;
+    private Boolean readed;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime created;

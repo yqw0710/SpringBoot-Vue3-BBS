@@ -27,7 +27,7 @@
       </button>
     </div>
     <third-party-login />
-    <p style="color: gray;padding: 5px">
+    <p style="color: gray; padding: 5px">
       登录注册即遵守该网站协议
       <a href="#">《balabala》</a>
     </p>

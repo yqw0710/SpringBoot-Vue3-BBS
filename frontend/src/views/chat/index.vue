@@ -1,21 +1,24 @@
 <template>
   <div>
     <h1>chat!</h1>
-    <div contenteditable>
-      {{ msg }}
+    <div class="chat-body">
+      <ChatRecord />
+      <div class="chat-history">
+        <ChatDialog />
+      </div>
     </div>
-    <input type="text" v-model="rec" />
-    <input type="text" v-model="content" />
-    <button @click="sendTo">sendTo</button>
   </div>
 </template>
 
 <script>
 import useChat from '@/hooks/Chat/useChat'
+import ChatRecord from './components/ChatRecord'
+import ChatDialog from './components/ChatDialog'
 import { ref } from 'vue'
 
 export default {
   name: 'chat',
+  components: { ChatRecord, ChatDialog },
   setup() {
     const { sendMessageTo, subscribeTalk } = useChat()
     const msg = ref('')
@@ -32,4 +35,18 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.chat-body {
+  display: flex;
+  border-radius: 4px;
+  height: 75vh;
+  position: relative;
+  border: 1px solid #d4d4d4;
+}
+.chat-history {
+  flex: 1;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+</style>

@@ -3,7 +3,11 @@
     <slot>
       <span class="open-btn">小表情</span>
     </slot>
-    <div v-show="show" class="emotion-wrapper">
+    <div
+      v-show="show"
+      :style="{ top: position === 'top' ? '-210px' : null }"
+      class="emotion-wrapper"
+    >
       <p style="font-size: 0.8rem">{{ currentEmotion }}</p>
       <div class="emotion-container" v-if="current === 'wechat'">
         <span
@@ -38,6 +42,7 @@ import { computed, ref } from 'vue'
 export default {
   name: 'EmotionBox',
   emits: ['emotion-add'],
+  props: ['position'],
   setup() {
     let show = ref(false)
     let current = ref('wechat')
@@ -59,7 +64,14 @@ export default {
       else if (current.value === 'kaomoji') return '颜文字'
       else return 'unknown'
     })
-    return { show, wechat, kaomoji, current, currentEmotion, handleClick }
+    return {
+      show,
+      wechat,
+      kaomoji,
+      current,
+      currentEmotion,
+      handleClick,
+    }
   },
 }
 </script>
@@ -68,6 +80,7 @@ export default {
 .emotion-box {
   display: inline-block;
   position: relative;
+  cursor: pointer;
   //展开表情盒子的按钮
   .open-btn {
     cursor: pointer;

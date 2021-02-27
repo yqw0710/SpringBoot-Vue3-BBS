@@ -8,7 +8,7 @@
       @change="setImage"
       accept="image/*"
     />
-    <div style="display: flex;margin-bottom: 20px">
+    <div style="display: flex; margin-bottom: 20px">
       <div class="cropper">
         <div v-if="!isChoose" @click="fileInput.click" class="chooser">
           <span>📷</span>

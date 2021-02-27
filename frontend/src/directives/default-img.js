@@ -4,16 +4,16 @@ import defaultBackground from '@/assets/images/cute.jpg'
  * 检测图片是否存在
  * @param url
  */
-let imageIsExist = function(url) {
+let imageIsExist = function (url) {
   return new Promise((resolve) => {
     let img = new Image()
-    img.onload = function() {
+    img.onload = function () {
       if (this.complete === true) {
         resolve(true)
         img = null
       }
     }
-    img.onerror = function() {
+    img.onerror = function () {
       resolve(false)
       img = null
     }

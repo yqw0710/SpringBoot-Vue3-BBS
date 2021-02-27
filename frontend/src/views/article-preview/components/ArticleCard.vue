@@ -8,9 +8,7 @@
     </div>
     <img class="article-pic" :src="article.firstPic" alt="" />
     <div class="article-bar">
-      <span class="date">
-        2020-1-1
-      </span>
+      <span class="date">2020-1-1</span>
       <el-tag class="difficulty" :color="difficultyColor">
         {{ difficultyText }}
       </el-tag>

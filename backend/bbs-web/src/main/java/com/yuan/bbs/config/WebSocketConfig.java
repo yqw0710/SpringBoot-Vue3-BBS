@@ -1,11 +1,8 @@
 package com.yuan.bbs.config;
 
 import com.yuan.bbs.common.utils.JwtUtil;
-import com.yuan.bbs.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -17,6 +14,7 @@ import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -25,7 +23,6 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -69,15 +66,19 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      * ----topic和/queue前缀没有任何特殊含义。它们只是区分 pub-sub 与 point-to-point 消息传递的惯例(即许多订阅者与一个消费者)
      * 2. 设置应用端点前缀
      * ----目标头以/app开头的 STOMP 消息将路由到控制器类中的@MessageMapping方法。而不会发布到代理队列或主题中。
-     * 3. 设置/user2为用户点对点发送消息的订阅前缀 如 stomp.subscribe("/user2/queue/shouts",()=>{})
+     * 3. 设置/user2为用户点对点发送消息的订阅前缀 如 stomp.subscribe("/user2/queue/shouts",()=>{}) [[默认是user]]
      * ----当用户B用上面的js代码订阅之后，用户A要发送消息给B可以先发送到带有@MessageMapping的方法(带上接收者)，
      * ----然后用SimpMessageSendingOperations.convertAndSendToUser(接收人，目的地`/queue/shouts`,消息)发送消息
      * ----然后订阅了这个目的地的用户B就能收到来自A的消息
+     * 4. 设置点作为分隔符，之后控制器可以使用点(.)作为@MessageMapping方法中的分隔符 例子如下
+     * ----@MessageMapping("blue.{green}")
+     * ----public void handleGreen(@DestinationVariable String green) { //.. }
      */
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic", "/queue");
-        config.setApplicationDestinationPrefixes("/app");
+        config.setPathMatcher(new AntPathMatcher("."))
+                .setApplicationDestinationPrefixes("/app")
+                .enableSimpleBroker("/topic", "/queue");
 //        config.setUserDestinationPrefix("/user2/");
     }
 
@@ -91,13 +92,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             HttpServletRequest servletRequest = ((ServletServerHttpRequest) request).getServletRequest();
             String token = servletRequest.getParameter("token");
             try {
-               jwtUtil.getSubject(token);
+                jwtUtil.getSubject(token);
             } catch (Exception e) {
                 return false;
             }
             return super.beforeHandshake(request, response, wsHandler, attributes);
         }
     }
+
     /**
      * 设置拦截器：是连接后，对发送/接收消息前/后进行拦截处理，最下面这两个暂时没啥用
      * 1、首次连接的时候，获取其Header信息，利用Header里面的信息进行权限认证
@@ -119,7 +121,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
             //1、判断是否首次连接,然后存储信息到Principal
             if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-                String uid =jwtUtil.getSubject( accessor.getNativeHeader("token").get(0));
+                String uid = jwtUtil.getSubject(accessor.getNativeHeader("token").get(0));
                 // 这个类可以直接作为Controller的一个参数
                 Principal principal = () -> uid;
                 accessor.setUser(principal);
