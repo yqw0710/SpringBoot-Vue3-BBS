@@ -64,7 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             String EncryptedPassword = CommonUtil.md5(dto.getPassword() + user.getSalt());
             if (user.getPassword().equals(EncryptedPassword)) {
                 SecurityUtil.setUserToSecurity(user);
-                String token = jwtUtils.generateToken( user.getId());
+                String token = jwtUtils.generateToken(user.getId());
                 return new UserDto().setToken(token)
                         .setNickname(user.getNickname())
                         .setUsername(user.getUsername())
@@ -92,7 +92,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String username = user.getUsername();
         userinfoService.save(new Userinfo().setUid(uid));
         signService.save(new Sign().setUid(uid));
-        String token = jwtUtils.generateToken( uid);
+        String token = jwtUtils.generateToken(uid);
         return new UserDto().setToken(token).setUid(uid).setNickname(username).setUsername(username);
     }
 

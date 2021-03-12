@@ -1,7 +1,7 @@
 import { ref, onMounted } from 'vue'
 export default function useTodos() {
   const todos = ref([])
-  // 添加 todo
+  // 添加 to.do
   const addTodo = (todo) => todos.value.push(todo)
   // 远程获取todos
   const fetchTodos = async () => {

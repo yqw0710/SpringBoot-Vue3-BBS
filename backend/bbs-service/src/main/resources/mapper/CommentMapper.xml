@@ -2,5 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuan.bbs.mapper.CommentMapper">
-
+    <select id="treeReplyOfComment" resultType="com.yuan.bbs.entity.Comment">
+        SELECT
+        a.id,a.parent_id,a.from_id,a.from_name,a.to_id,a.to_name,a.likes,a.content,a.gmt_create,u.avatar
+        FROM y_comment a JOIN y_user u ON a.from_id=u.id JOIN y_comment b ON
+        a.parent_id=b.parent_id AND a.id <![CDATA[ <= ]]> b.id where a.parent_id
+        IN
+        <foreach item="item" collection="ids" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        GROUP BY a.id,a.parent_id HAVING COUNT(b.id) <![CDATA[ <= ]]> 3
+    </select>
 </mapper>

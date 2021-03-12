@@ -50,8 +50,9 @@ public class ChatController {
     }
 
 
-    @MessageMapping("/talkTo")
+    @MessageMapping("talk2")
     public void talkTo(Chat chat, Principal principal) {
+        System.out.println("talk to!");
         // 设置发送人的id
         chat.setSidFromPrincipal(principal);
         chat.setCreated(LocalDateTime.now());

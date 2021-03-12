@@ -2,20 +2,29 @@
   <div class="chat-record">
     <div class="chat-search">
       <i class="el-icon-search" />
-      <input type="text" placeholder="搜索" />
+      <input type="text" v-model="search" placeholder="搜索" />
     </div>
     <div class="chat-list">
-      <ChatRecordItem />
-      <ChatRecordItem />
+      <ChatRecordItem
+        v-for="item in records"
+        v-show="item.nickname.indexOf(search) > -1"
+        :sender="item"
+        :key="item.fromId"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import ChatRecordItem from './ChatRecordItem'
+import { ref } from 'vue'
 export default {
   name: 'ChatRecord',
+  props: ['records'],
   components: { ChatRecordItem },
+  setup() {
+    return { search: ref('') }
+  },
 }
 </script>
 
@@ -57,7 +66,6 @@ export default {
     height: calc(100% - 35px);
     position: relative;
     overflow: hidden;
-
     &:hover {
       overflow-y: scroll;
     }

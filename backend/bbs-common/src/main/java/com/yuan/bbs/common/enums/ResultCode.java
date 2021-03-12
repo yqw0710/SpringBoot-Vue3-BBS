@@ -24,7 +24,7 @@ public enum ResultCode {
 
     //    #3000~3999 区间表示sql错误
     SQL_EXCEPTION(3001, "sql异常"),
-    SQL_DuplicateKey_EXCEPTION(3002,"字段值重复");
+    SQL_DuplicateKey_EXCEPTION(3002, "字段值重复");
 
     private final Integer code;
     private final String msg;

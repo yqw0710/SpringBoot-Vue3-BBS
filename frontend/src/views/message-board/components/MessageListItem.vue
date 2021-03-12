@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { computed, toRefs } from 'vue'
+import { computed } from 'vue'
 import { useProcessEmotion } from '@/hooks/Emotion/useEmotions'
 
 export default {
@@ -46,9 +46,7 @@ export default {
     const isUser = computed(() => {
       return props.model.userId > 0
     })
-    const content = computed(() => {
-      return useProcessEmotion(props.model.content)
-    })
+    const content = computed(() => useProcessEmotion(props.model.content))
     return { isUser, content }
   },
 }

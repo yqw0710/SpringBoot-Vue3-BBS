@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <h1>chat!</h1>
-    <div class="chat-body">
-      <ChatRecord />
-      <div class="chat-history">
-        <ChatDialog />
-      </div>
+  <div class="chat-body">
+    <ChatRecord :records="senders" />
+    <div class="chat-history">
+      <ChatDialog v-if="currentChatTarget" />
+      <el-empty v-else description="在线聊天" />
     </div>
   </div>
 </template>
@@ -14,23 +12,15 @@
 import useChat from '@/hooks/Chat/useChat'
 import ChatRecord from './components/ChatRecord'
 import ChatDialog from './components/ChatDialog'
-import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'chat',
   components: { ChatRecord, ChatDialog },
   setup() {
-    const { sendMessageTo, subscribeTalk } = useChat()
-    const msg = ref('')
-    const content = ref(null)
-    const rec = ref(null)
-    const sendTo = () => {
-      sendMessageTo(rec.value, content.value)
-    }
-    subscribeTalk((content) => {
-      msg.value = content
-    })
-    return { sendTo, msg, rec, content }
+    const { currentChatTarget, senders, init } = useChat()
+    init(useStore().getters.uid)
+    return { currentChatTarget, senders }
   },
 }
 </script>
@@ -48,5 +38,4 @@ export default {
   background-color: #f5f5f5;
   color: #333;
 }
-
 </style>

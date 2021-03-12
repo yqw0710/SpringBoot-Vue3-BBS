@@ -13,11 +13,40 @@
       </el-tab-pane>
     </el-tabs>
     <div class="right" style="position: relative">
-      <h1>!!</h1>
-      <h1>!!</h1>
-      <h1>!!</h1>
-      <h1>!!</h1>
-      <h1>!!</h1>
+      <ul class="icons" style="list-style: none">
+        <li>
+          <i class="el-icon-platform-eleme"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-eleme"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-user-solid"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-user"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-star-on"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-star-off"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-phone"></i>
+          <span>el-icon</span>
+        </li>
+        <li>
+          <i class="el-icon-phone-outline"></i>
+          <span>el-icon</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -47,6 +76,29 @@ export default {
   flex: 1;
   > h1 {
     text-align: center;
+  }
+}
+.icons {
+  padding-left: 5px;
+  cursor: pointer;
+  position: sticky;
+  top: 0;
+  > li {
+    width: 25%;
+    height: 100px;
+    padding-top: 15px;
+    border: 1px solid #e7e1e1;
+    float: left;
+    text-align: center;
+    > i {
+      font-size: 3rem;
+    }
+    > span {
+      display: inline-block;
+    }
+    &:hover {
+      background-color: #e3e3e3;
+    }
   }
 }
 </style>

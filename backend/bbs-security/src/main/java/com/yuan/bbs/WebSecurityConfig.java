@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuan.bbs.common.enums.ResultCode;
 import com.yuan.bbs.common.lang.Result;
 import com.yuan.bbs.common.utils.SpringUtil;
-import com.yuan.bbs.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -101,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/webjars/**", "/doc.html", "/v2/**","/archive/**", "/swagger-resources/**") // knife4j相关放行
+                .antMatchers("/webjars/**", "/doc.html", "/v2/**", "/archive/**", "/swagger-resources/**") // knife4j相关放行
                 .antMatchers("/css/**", "/js/**", "/img/**", "/fonts/**", "/index.html", "/favicon.ico");
     }
 

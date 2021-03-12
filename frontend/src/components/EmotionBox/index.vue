@@ -1,12 +1,15 @@
 <template>
-  <div @click.stop="handleClick" class="emotion-box">
-    <slot>
-      <span class="open-btn">小表情</span>
-    </slot>
+  <div class="emotion-box">
+    <span @click.stop="show = !show" style="cursor: pointer">
+      <slot>
+        <span class="open-btn">小表情</span>
+      </slot>
+    </span>
     <div
       v-show="show"
       :style="{ top: position === 'top' ? '-210px' : null }"
       class="emotion-wrapper"
+      v-ClickOutside="changeShow"
     >
       <p style="font-size: 0.8rem">{{ currentEmotion }}</p>
       <div class="emotion-container" v-if="current === 'wechat'">
@@ -15,7 +18,7 @@
           :key="'w:' + index"
           class="emotion"
           v-html="item.url"
-          @click.stop="$emit('emotion-add', item.name)"
+          @click="$emit('emotion-add', item.name)"
         />
       </div>
       <div class="emotion-container" v-else-if="current === 'kaomoji'">
@@ -24,7 +27,7 @@
           :key="'k:' + index"
           class="emotion"
           v-html="item"
-          @click.stop="$emit('emotion-add', item)"
+          @click="$emit('emotion-add', item)"
         />
       </div>
       <div class="emotion-tabs">
@@ -38,39 +41,35 @@
 <script>
 import { useEmotions } from '@/hooks/Emotion/useEmotions'
 import { computed, ref } from 'vue'
+import ClickOutside from '@/directives/click-outside'
 
+// Use  @emotion-add="(val) => (form.content += val)"
 export default {
   name: 'EmotionBox',
   emits: ['emotion-add'],
   props: ['position'],
+  directives: { ClickOutside },
   setup() {
     let show = ref(false)
     let current = ref('wechat')
     let wechat = useEmotions('wechat')
     let kaomoji = useEmotions('kaomoji')
-    const handleClick = () => {
-      if (show.value) {
-        document.onclick = null
-      } else {
-        document.onclick = () => {
-          show.value = false
-          document.onclick = null
-        }
-      }
-      show.value = !show.value
-    }
+
     const currentEmotion = computed(() => {
       if (current.value === 'wechat') return '微信表情'
       else if (current.value === 'kaomoji') return '颜文字'
       else return 'unknown'
     })
+
+    const changeShow = () => (show.value = false)
+
     return {
       show,
       wechat,
       kaomoji,
       current,
       currentEmotion,
-      handleClick,
+      changeShow,
     }
   },
 }
@@ -80,10 +79,8 @@ export default {
 .emotion-box {
   display: inline-block;
   position: relative;
-  cursor: pointer;
   //展开表情盒子的按钮
   .open-btn {
-    cursor: pointer;
     height: 30px;
     user-select: none;
     line-height: 30px;
@@ -120,7 +117,6 @@ export default {
   .emotion-tabs {
     font-size: 0.95rem;
     padding: 5px;
-
     > a {
       cursor: pointer;
       padding: 3px;

@@ -4,9 +4,9 @@
     <div class="view-area">
       <content-display v-if="loaded" :article="post" />
       <hr />
-      <h2>TODO 评论区</h2>
+      <comment-area/>
     </div>
-    <div class="sidebar">
+    <div class="sidebar" style="display: none">
       <h2>22</h2>
       <h2>22</h2>
     </div>
@@ -18,10 +18,11 @@ import { useRoute } from 'vue-router'
 import { getPostDetail } from '@/api/post'
 import SuspendedPanel from './components/SuspendedPanel'
 import ContentDisplay from '@/components/ContentDisplay'
+import CommentArea from '@/components/CommentArea'
 import { reactive, ref } from 'vue'
 export default {
   name: 'PostDetail',
-  components: { SuspendedPanel, ContentDisplay },
+  components: { SuspendedPanel, ContentDisplay, CommentArea },
   setup() {
     let route = useRoute()
     let pid = route.params.pid
@@ -47,6 +48,7 @@ export default {
 }
 .view-area {
   width: 65%;
+  margin: 0 auto;
   //border: 1px solid red;
 }
 .sidebar {

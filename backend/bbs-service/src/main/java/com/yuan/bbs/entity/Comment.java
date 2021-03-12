@@ -89,7 +89,7 @@ public class Comment implements Serializable {
     @ApiModelProperty(hidden = true)
     private Long childrenCount;
 
-    //评论者头像 其他方式获取
+    //评论者头像
     @TableField(exist = false)
     @ApiModelProperty(hidden = true)
     private String fromAvatar;

@@ -19,7 +19,7 @@ export default {
 }
 
 .app-container {
-  padding: 0 15px;
+  //padding: 0 15px;
   margin: 10px auto;
   width: 1000px;
   // box-shadow: $box-shadow-base;

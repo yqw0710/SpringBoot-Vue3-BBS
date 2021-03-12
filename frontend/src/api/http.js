@@ -20,9 +20,9 @@ axios.interceptors.request.use((request) => {
 // 3. 配置*响应*拦截器
 axios.interceptors.response.use(
   (response) => {
-    console.log('===in http.js===')
+    /*   console.log('===in http.js===')
     console.log(response.data)
-    console.log('===in http.js===')
+    console.log('===in http.js===')*/
     return response.data
   },
   (error) => {

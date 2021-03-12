@@ -28,6 +28,10 @@ spring:
     livereload:
       enabled: false
 
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
 jwt:
   # 加密秘钥
   secret: f4e2e52034348f86b67cde581c0f9eb5

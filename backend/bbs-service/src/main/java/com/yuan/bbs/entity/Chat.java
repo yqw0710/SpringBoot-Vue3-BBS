@@ -56,10 +56,11 @@ public class Chat implements Serializable {
 
 
     public void setSidFromPrincipal(Principal principal) {
-        this.sid=Integer.parseInt(principal.getName());
+        this.sid = Integer.parseInt(principal.getName());
     }
-    public String  getReceive(){
-      return  this.rid+"";
+
+    public String getReceive() {
+        return this.rid + "";
     }
 
 }

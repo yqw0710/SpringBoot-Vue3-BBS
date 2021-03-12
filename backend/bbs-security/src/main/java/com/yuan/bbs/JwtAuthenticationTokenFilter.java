@@ -34,7 +34,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String token = request.getHeader(header);
         if (token != null) {
             String uid = jwtUtil.getSubject(token);
-            System.out.println("uid:"+uid);
+            System.out.println("uid:" + uid);
             System.out.println("doFilterInternal start:filter timing ms:" + (System.currentTimeMillis() - start));
             if (uid != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userService.loadUserByUsername(uid);

@@ -1,7 +1,6 @@
 package com.yuan.bbs.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yuan.bbs.common.pojo.ChatRecordDto;
 import com.yuan.bbs.entity.Chat;
 import org.apache.ibatis.annotations.ResultType;
@@ -24,9 +23,7 @@ public interface ChatMapper extends BaseMapper<Chat> {
             "where c.rid=#{rid} and c.rid=u.id and c.read =0\n" +
             "order by c.created desc")
     @ResultType(Chat.class)
-    List<Chat> unreadChatRecordList( Integer rid);
-
-
+    List<Chat> unreadChatRecordList(Integer rid);
 
     @Select("SELECT count(readed = 0 OR NULL) AS unread,content,created,from_id,nickname,avatar \n" +
             " FROM (\n" +

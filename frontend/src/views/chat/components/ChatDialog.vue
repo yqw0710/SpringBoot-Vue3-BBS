@@ -1,85 +1,71 @@
 <template>
   <div class="dialog">
     <div class="title">
-      <span>迪奥·布兰德X</span>
+      <span>{{ currentChatObj.nickname }}</span>
       <span class="dialog-menu">...</span>
     </div>
-    <div class="message-list">
-      <div class="message-more">
-        <p class="no-more">没有更多消息了la</p>
-        <!--              加载更多-->
-      </div>
-      <div class="message-item not-me">
-        <a class="message-sender" href="#">
-          <img src="~@/assets/images/dio.jpg" class="avatar-small" alt="" />
-        </a>
-        <div class="message-content">
-          平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤平角裤
-        </div>
-      </div>
-      <div class="message-item not-me">
-        <a class="message-sender" href="#">
-          <img src="~@/assets/images/dio.jpg" class="avatar-small" alt="" />
-        </a>
-        <div class="message-content">平角裤</div>
-      </div>
-      <div class="message-time">2020-1-1 12:30</div>
-      <div class="message-item is-me">
-        <a class="message-sender" href="#">
-          <img src="~@/assets/images/jojo.jpg" class="avatar-small" alt="" />
-        </a>
-        <div class="message-content">你到底想说什么</div>
-      </div>
-    </div>
+    <ChatMessageList :current="currentChatObj" />
     <div class="send">
       <div class="toolbar">
-        <emotion-box position="top">😃</emotion-box>
+        <emotion-box @emotion-add="(val) => (userInput += val)" position="top">
+          😃
+        </emotion-box>
         <span>📷</span>
       </div>
-      <div class="input-box" contenteditable></div>
-      <button class="btn send-btn">发送(S)</button>
+      <textarea
+        v-model="userInput"
+        @keydown.enter="keyDown"
+        class="input-box"
+      />
+      <button class="btn send-btn" @click="sendMessage">发送(S)</button>
     </div>
   </div>
 </template>
-
 <script>
 import EmotionBox from '@/components/EmotionBox'
-
+import ChatMessageList from './ChatMessageList'
+import useChat from '@/hooks/Chat/useChat'
+import { ref, watch } from 'vue'
 export default {
   name: 'ChatDialog',
-  components: { EmotionBox },
+  components: { EmotionBox, ChatMessageList },
+  setup() {
+    const {
+      senders,
+      sendMessageTo,
+      currentChatObj,
+      currentChatTarget,
+    } = useChat()
+    // 监听选择聊天对象的变化，备份输入框内容，并恢复之前的暂存内容
+    watch(currentChatTarget, (newVal, oldVal) => {
+      senders[oldVal].userInput = userInput.value
+      userInput.value = senders[newVal].userInput || ''
+    })
+    // 发送消息
+    const sendMessage = () => {
+      console.log('SendTo ' + currentChatTarget.value + ':' + userInput.value)
+      sendMessageTo(currentChatTarget.value, userInput.value)
+      userInput.value = ''
+    }
+    const userInput = ref('')
+    const keyDown = (e) => {
+      if (e.ctrlKey && e.keyCode === 13) {
+        sendMessage()
+      }
+    }
+    return {
+      currentChatObj,
+      userInput,
+      sendMessage,
+      keyDown,
+    }
+  },
 }
 </script>
 
 <style lang="scss">
 .item-active {
   background-color: #c5c5c5 !important;
-}
-.is-me {
-  > * {
-    float: right;
-  }
-  .message-content {
-    color: #fff;
-    border-radius: 14px 0 14px 14px;
-    background-color: $primary-color;
-  }
-}
-.not-me {
-  > * {
-    float: left;
-  }
-  .message-content:before {
-    content: '';
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: 12px;
-    left: 54px;
-    border-top: solid 6px transparent;
-    border-right: solid 6px #fff;
-    border-bottom: solid 6px transparent;
-  }
 }
 </style>
 <style lang="scss" scoped>
@@ -107,86 +93,27 @@ export default {
     right: 8px;
   }
 }
-.message-list {
-  flex: 1;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  > * {
-    margin-bottom: 10px;
-  }
-  .no-more {
-    color: #9c9a9a;
-    font-size: 12px;
-    padding: 6px;
-    text-align: center;
-  }
-  .message-item {
-    min-height: 40px;
-    padding: 0 14px;
-    overflow: hidden;
-    position: relative;
-  }
-  .message-content {
-    margin: 0 10px 0;
-    padding: 10px;
-    max-width: 80%;
-    border-radius: 8px;
-    border: 1px solid #ececec;
-    word-break: break-word;
-    overflow: hidden;
-    font-size: 14px;
-    background-color: #fff;
-  }
-  .message-time {
-    text-align: center;
-    color: #7b7b7b;
-    font-size: 12px;
-  }
-  .is-me {
-    > * {
-      float: right;
-    }
-    .message-content {
-      color: #fff;
-      border-radius: 14px 0 14px 14px;
-      background-color: $primary-color;
-    }
-  }
-  .not-me {
-    > * {
-      float: left;
-    }
-    .message-content:before {
-      content: '';
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 12px;
-      left: 54px;
-      border-top: solid 6px transparent;
-      border-right: solid 6px #fff;
-      border-bottom: solid 6px transparent;
-    }
-  }
-}
 .send {
   position: relative;
   height: 120px;
-  border-top: 1px solid #e2e2e2;
+  border-top: 1px solid #e8e8e8;
   > .toolbar {
-    position: absolute;
-    height: 22px;
+    //position: absolute;
+    height: 25px;
     padding-left: 10px;
     padding-top: 5px;
     width: 100%;
     > * {
-      cursor: pointer;
       margin-right: 15px;
     }
   }
   > .input-box {
-    height: 100%;
-    padding: 30px 5px 0 5px;
+    height: 95px;
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 5px 5px 0 5px;
     white-space: pre-wrap;
     overflow-x: hidden;
     overflow-y: auto;
@@ -194,10 +121,6 @@ export default {
     font-size: 14px;
     vertical-align: baseline;
     word-break: break-word;
-    outline: none;
-    &:focus {
-      background-color: #fff;
-    }
   }
   > .send-btn {
     position: absolute;

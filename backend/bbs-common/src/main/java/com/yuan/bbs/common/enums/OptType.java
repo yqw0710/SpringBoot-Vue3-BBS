@@ -14,7 +14,9 @@ public enum OptType {
     Login(1, "登录"),
     POSTED(2, "发帖"),
     COMMENT(3, "评论"),
-    TWEET(4, "发推");
+    TWEET(4, "发推"),
+    DELETE_COMMENT(5, "删除评论"),
+    MAKE_COMMENT(6, "发表评论");
 
     private final int type;
     private final String desc;

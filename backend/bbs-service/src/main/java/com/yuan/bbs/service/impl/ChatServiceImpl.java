@@ -38,6 +38,7 @@ public class ChatServiceImpl extends ServiceImpl<ChatMapper, Chat> implements Ch
         return chatMapper.chatRecordList(uid);
     }
 
+
     /**
      * @param sid  sender
      * @param rid  receiver
@@ -50,6 +51,9 @@ public class ChatServiceImpl extends ServiceImpl<ChatMapper, Chat> implements Ch
         QueryWrapper<Chat> wrapper = new QueryWrapper<>();
         wrapper.eq("sid", sid)
                 .eq("rid", rid)
+                .or()
+                .eq("sid", rid)
+                .eq("rid", sid)
                 .orderByDesc("created");
         // 获取聊天记录时，可以将消息的接收者和发送者相关的是否阅读置为1
         if (readAll != null && readAll) {

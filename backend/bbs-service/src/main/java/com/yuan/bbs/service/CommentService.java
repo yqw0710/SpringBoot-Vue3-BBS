@@ -15,32 +15,29 @@ import com.yuan.bbs.entity.Comment;
  */
 public interface CommentService extends IService<Comment>, Likeable {
 
+    /**
+     * 分页获取某个资源下的评论
+     *
+     * @param itemType 资源类型
+     * @param itemId   资源主键
+     */
+    IPage<Comment> listComments(Integer itemType, Integer itemId, Integer num, Integer size);
 
     /**
-     * 分页获取父级评论,还要检查参数大小 这样耗时还挺高的..
+     * 分页获取某个评论下的回复
      */
-    IPage<Comment> selectPageParent(Integer type, Integer id, Integer num, Integer size);
+    IPage<Comment> listReplyOfComment(Integer pid, Integer num, Integer size);
 
-    /**
-     * 分页获取子评论,只需要父评论的id
-     */
-    IPage<Comment> selectPageChildren(Integer pid, Integer num, Integer size);
-
-
-    /**
-     * 获取当前用户最新发布的评论 用于返回
-     */
-    Comment getLastComment(Integer type, Integer id, Integer uid);
-
-    /**
-     * 获取当前用户最新发布的评论 用于插入评论后返回
-     */
-    Comment getLastComment(Comment comment);
 
     /**
      * 保存评论
      */
     Comment saveComment(Integer uid, Comment comment);
 
-    void deleteComment(int id, int uid);
+    /**
+     * 删除评论
+     */
+    boolean deleteComment(Integer id, Integer uid);
+
+
 }

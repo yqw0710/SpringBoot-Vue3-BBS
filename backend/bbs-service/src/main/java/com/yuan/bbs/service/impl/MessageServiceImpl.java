@@ -68,6 +68,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
     /**
      * TODO 这里应该就用一条语句 select * from message where id=xx or pid=xx group by id
      * 这样一条就出来了，然后后端这里处理下。原来写的效率过低
+     *
      * @param num
      * @param size
      * @return

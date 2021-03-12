@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 
-@Api(tags="文章阅读")
+@Api(tags = "文章阅读")
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
@@ -55,6 +55,7 @@ public class ArticleController {
         articleService.edit(articleDto, uid);
         return Result.succ();
     }
+
     @ApiOperation("修改文章状态")
     @PutMapping("/{aid}")
     public Result setArticleStatus(@PathVariable Integer aid, Integer val) {
